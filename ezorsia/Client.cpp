@@ -435,7 +435,7 @@ void Client::UpdateResolution() {
 
 	int msgAmntOffset, msgAmnt; msgAmnt = MsgAmount; msgAmntOffset = msgAmnt * 14;
 
-	Memory::WriteInt(0x0089B639 + 1, m_nGameHeight - 6 - msgAmntOffset - 80);//inventory/exp gain y axis //####hd100 //90
+	Memory::WriteInt(0x0089B639 + 1, m_nGameHeight - 6 - msgAmntOffset - 65);//inventory/exp gain y axis //####hd100 //90
 	Memory::WriteInt(0x0089B6F7 + 1, m_nGameWidth - 405);//inventory/exp gain x axis //310 //####hd415 //405
 
 	Memory::WriteInt(0x0089AF33 + 1, 400);//length of pick up and exp gain message canvas //found with help from Davi
