@@ -40,10 +40,6 @@ void Memory::FillBytes(const DWORD dwOriginAddress, const unsigned char ucValue,
     else { memset((void*)dwOriginAddress, ucValue, nCount); }
 }
 
-/*
- 注意: 原文本长度>=新文本长度
- 示例: Memory::ReplaceString(0x00B3C158, "双击发送消息", "Double-click to send a note.");
-*/
 void Memory::ReplaceString(const DWORD dwOriginAddress, const char* sContent, const char* oContent)
 {
     WriteString(dwOriginAddress, sContent);
@@ -52,10 +48,6 @@ void Memory::ReplaceString(const DWORD dwOriginAddress, const char* sContent, co
     FillBytes(dwOriginAddress + sSize, 0, oSize + 1 - sSize);
 }
 
-/*
-oSize: 要填充的长度，>=填充的字符串长度，中文=2个长度
-示例: Memory::WriteString(0x00AF2B28, "对联盟", 11);
-*/
 void Memory::WriteString(const DWORD dwOriginAddress, const char* sContent, const int oSize)
 {
     WriteString(dwOriginAddress, sContent);

@@ -132,26 +132,26 @@ void Client::UpdateGameStartup() {
 	Memory::WriteString(0x00AFE084, serverIP_Address);//write the user-set IP address
 	Memory::WriteString(0x00AFE084 + 16, serverIP_Address);//write the user-set IP address
 	Memory::WriteString(0x00AFE084 + 32, serverIP_Address);//write the user-set IP address
-	Memory::WriteInt(0x007519C1 + 1, serverIP_Port);//登录端口
+	Memory::WriteInt(0x007519C1 + 1, serverIP_Port);
 
 	//optional non-resolution related stuff
 	if (useTubi) { Memory::FillBytes(0x00485C32, 0x90, 2); }
 
-	Memory::WriteInt(0x0077E055 + 1, 2147483646); // 物攻PAD 相关具体不明，默认值1999，int 4字节
-	Memory::WriteInt(0x0077E12F + 1, 2147483646); // 技能 相关具体不明，默认值1999，int 4字节
-	Memory::WriteInt(0x008C3304 + 1, setDamageCap); // 物攻面板，默认值199999，int 4字节
-	Memory::WriteInt(0x0077E215 + 1, setMAtkCap); // 魔攻面板，int 4字节
-	Memory::WriteInt(0x00780620 + 1, setMAtkCap); // 魔攻面板，int 4字节
-	Memory::WriteInt(0x007806D0 + 1, setAccCap); // 命中，默认999
-	Memory::WriteInt(0x00780702 + 1, setAvdCap); // 回避，默认999
-	Memory::WriteInt(0x0078FF5F + 1, 2147483646); // 计算物理伤害相关，意义不明，默认1999，int 4字节
-	Memory::WriteInt(0x0079166C + 1, 2147483646); // 计算魔攻MDamage的，默认值1999，int 4字节，注意：这里不改的话，打怪输出计算的魔法伤害就是按1999计算的
-	Memory::WriteInt(0x00791CD5 + 1, 2147483646); // 计算魔攻MDamage的，默认值1999，int 4字节，注意：这里不改似乎也不影响输出计算
-	Memory::WriteInt(0x0078E061 + 1, 2147483646); //CalcDamage::PDamage 999，意义不明，int 4字节
-	Memory::WriteInt(0x0078E67D + 1, 2147483646); //CalcDamage::PDamage 999，意义不明，int 4字节
-	Memory::WriteInt(0x007918FC + 1, 2147483646); //CalcDamage::MDamage 999，意义不明，int 4字节
+	Memory::WriteInt(0x0077E055 + 1, 2147483646);
+	Memory::WriteInt(0x0077E12F + 1, 2147483646);
+	Memory::WriteInt(0x008C3304 + 1, setDamageCap);
+	Memory::WriteInt(0x0077E215 + 1, setMAtkCap);
+	Memory::WriteInt(0x00780620 + 1, setMAtkCap);
+	Memory::WriteInt(0x007806D0 + 1, setAccCap);
+	Memory::WriteInt(0x00780702 + 1, setAvdCap);
+	Memory::WriteInt(0x0078FF5F + 1, 2147483646);
+	Memory::WriteInt(0x0079166C + 1, 2147483646);
+	Memory::WriteInt(0x00791CD5 + 1, 2147483646);
+	Memory::WriteInt(0x0078E061 + 1, 2147483646);
+	Memory::WriteInt(0x0078E67D + 1, 2147483646);
+	Memory::WriteInt(0x007918FC + 1, 2147483646);
 
-	Memory::WriteDouble(0x00AFE8A0, setAtkOutCap);	// 输出显示上限，默认199999，double 8字节
+	Memory::WriteDouble(0x00AFE8A0, setAtkOutCap);
 
 
 	Memory::WriteInt(0x00780743 + 3, speedMovementCap); //set speed cap //ty ronan
@@ -348,7 +348,7 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x008DEB93 + 1, m_nGameHeight - 20);	//push 580
 	Memory::WriteInt(0x008DEE2F + 1, m_nGameHeight - 20);	//push 580
 	Memory::WriteInt(0x008D2765 + 1, m_nGameHeight - 19);	//push 581
-	Memory::WriteInt(0x008DA11C + 1, m_nGameHeight - 19);	//push 581 临时经验条
+	Memory::WriteInt(0x008DA11C + 1, m_nGameHeight - 19);	//push 581
 	Memory::WriteInt(0x008D29B4 + 1, m_nGameHeight - 19);	//push 581
 	Memory::WriteInt(0x008D8BFE + 1, m_nGameHeight - 19);	//push 581
 	Memory::WriteInt(0x008D937E + 1, m_nGameHeight - 19);	//push 581 //008D9373  move mana bar outline? //ty rynyan
@@ -520,7 +520,7 @@ void Client::UpdateResolution() {
 
 	Memory::WriteInt(0x0052418C + 1, m_nGameHeight - 102 - 10);//party quest available pop-up y axis		my first address find own my own
 
-	Memory::WriteInt(0x00523092 + 1, 423);// 交易申请气泡x坐标
+	Memory::WriteInt(0x00523092 + 1, 423);
 	Memory::WriteInt(0x0052336D + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up //Party Invite
 	Memory::WriteInt(0x00522E79 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up //friend request
 	Memory::WriteInt(0x00522C87 + 1, m_nGameWidth - 942 + 26 + 37 + 62);//various requests like party, guild, friend, family, invites that pop up	// Guild Invite
@@ -564,8 +564,7 @@ void Client::UpdateResolution() {
 
 	myHeight = (Client::m_nGameHeight - 600) / 2;//cash shop fix for frame area	//recalc offsets
 	myWidth = (Client::m_nGameWidth - 800) / 2;//cash shop fix for frame area		//recalc offsets
-	
-	// 现金商城居中
+
 	nHeightOfsetted1 = 316; nWidthOfsetted1 = 256; nTopOfsetted1 = 0 + myHeight; nLeftOfsetted1 = 0 + myWidth; //parameters for fix1
 	Memory::CodeCave(CashShopFix1, dwCashFix1, dwCashFix1NOPs);
 	nHeightOfsetted2 = 104; nWidthOfsetted2 = 256; nTopOfsetted2 = 318 + myHeight; nLeftOfsetted2 = -1 + myWidth; //parameters for fix2
@@ -588,7 +587,6 @@ void Client::UpdateResolution() {
 	nHeightOfsettedPrev = 165 + myHeight; nWidthOfsettedPrev = 212 + myWidth; nTopOfsettedPrev = 40 + myHeight; nLeftOfsettedPrev = 24 + myWidth; //parameters for fix cash preview
 	Memory::CodeCave(CashShopFixPrev, dwCashFixPrev, dwCashFixPrevNOPs); //cash shop preview fix
 
-	// 交易中心居中
 	iHeightOfsetted1 = 200; iWidthOfsetted1 = 256; iTopOfsetted1 = 0 + myHeight; iLeftOfsetted1 = 0 + myWidth;
 	Memory::CodeCave(ITCFix1, 0x0059E9E1, 12);
 	iHeightOfsetted2 = 110; iWidthOfsetted2 = 256; iTopOfsetted2 = 200 + myHeight; iLeftOfsetted2 = -1 + myWidth;
@@ -743,19 +741,12 @@ void Client::Chinese() {
 
 	FixBuddy::Hook();
 	if(SwitchChinese) {
-		// 聊天栏选项
-		Memory::WriteString(0x00AF2B28, "对联盟     ");
-
-		// 有效期字体大小
+		Memory::WriteString(0x00AF2B28, "癸羛幅     ");
 		Memory::WriteByte(0x008E55ED + 1, 0x0B);
-
-		// 属性位置字体大小
 		Memory::WriteByte(0x008E557A + 1, 0x0B);
 		Memory::WriteByte(0x008E565E + 1, 0x0B);
-
-		// 玩家名片 职业字体大小和位置
-		Memory::WriteByte(0x0090142E + 1, 0x5E); // 60->5E 位置上移
-		Memory::WriteByte(0x00901400 + 1, 1); // 字体type改为1 对应12号大小
+		Memory::WriteByte(0x0090142E + 1, 0x5E);
+		Memory::WriteByte(0x00901400 + 1, 1);
 	}
 }
 
@@ -880,10 +871,6 @@ void Client::JumpCap() {
 }
 
 void Client::FixChatPosHook() {
-	// 修复聊天窗里的聊天信息偏下的问题
-	// Memory::WriteByte(0x008DD05A + 2, 0x4);
-	// Memory::WriteByte(0x008DD067 + 2, 0x3);
-	// 老方法导致收起聊天框时，显示的信息太偏下了
 	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
 }
 
@@ -896,11 +883,11 @@ void Client::NoPassword() {
 
 void Client::MoreHook() {
 	Memory::WriteInt(0x009A3D81, 480);
-	Memory::WriteByte(0x008EC4A7 + 1, 0x23);//装备属性页面的职业需求偏移战士
-	Memory::WriteByte(0x008EC53C + 1, 0x4D);//魔法师
-	Memory::WriteByte(0x008EC5D1 + 1, 0x7A);//弓箭手
-	Memory::WriteByte(0x008EC660 + 1, 0xA9);//飞侠
-	Memory::WriteByte(0x008EC6CF + 1, 0xC8);//海盗
+	Memory::WriteByte(0x008EC4A7 + 1, 0x23);
+	Memory::WriteByte(0x008EC53C + 1, 0x4D);
+	Memory::WriteByte(0x008EC5D1 + 1, 0x7A);
+	Memory::WriteByte(0x008EC660 + 1, 0xA9);
+	Memory::WriteByte(0x008EC6CF + 1, 0xC8);
 	Memory::CodeCave(faceHairCave, 0x005C94F3, 18);
 	Memory::CodeCave(canSendPkgTimeCave, 0x00485C28, 10);
 
@@ -908,39 +895,32 @@ void Client::MoreHook() {
 	{
 		Memory::WriteByte(0x004905ED + 1, 5);
 	}
+
 	Memory::WriteInt(0x0049064B + 2, talkTime);
 
 	if (setAtkOutCap > 999999)
 	{
-		Memory::WriteInt(0x008C485A + 1, 192); // 面板关闭按钮x
-		Memory::WriteInt(0x008C4AB3 + 1, 210); // 面板宽度
-		Memory::WriteInt(0x008C510A + 1, 218); // 详情面板宽度
-		Memory::WriteInt(0x008C4EA2 + 1, 210); // 详情面板初始x
-		Memory::WriteInt(0x008C5760 + 1, 210); // 详情面板切换x
-		Memory::WriteInt(0x008C7AD9 + 1, 185); // 加属性按钮x
-		Memory::WriteInt(0x008C2754 + 1, 195); // 详情面板关闭按钮x
-		Memory::WriteInt(0x008C6C72 + 1, 210); // 移动时详情面板x
-		Memory::CodeCave(apDetailBtn, 0x008C4E1B, 7); // 详情按钮
+		Memory::WriteInt(0x008C485A + 1, 192);
+		Memory::WriteInt(0x008C4AB3 + 1, 210);
+		Memory::WriteInt(0x008C510A + 1, 218);
+		Memory::WriteInt(0x008C4EA2 + 1, 210);
+		Memory::WriteInt(0x008C5760 + 1, 210);
+		Memory::WriteInt(0x008C7AD9 + 1, 185);
+		Memory::WriteInt(0x008C2754 + 1, 195);
+		Memory::WriteInt(0x008C6C72 + 1, 210);
+		Memory::CodeCave(apDetailBtn, 0x008C4E1B, 7);
 	}
-	// 喇叭
+
 	Memory::WriteInt(0x0045A5BE + 1, 9999);
-
-
-	// 窗口保存位置
-	Memory::WriteInt(0x0049D218 + 1, m_nGameWidth - 16);// 窗口保存位置边界 x
-	Memory::WriteInt(0x0049D268 + 1, m_nGameHeight - 16);// 窗口保存位置边界 y
+	Memory::WriteInt(0x0049D218 + 1, m_nGameWidth - 16);
+	Memory::WriteInt(0x0049D268 + 1, m_nGameHeight - 16);
 }
 
 void Client::WorldMap()
 {
-
-	//解除世界大地图限制
 	// WorldMap Cap Increase
 	Memory::WriteByteArray(0x009EA030, world_cap_increase_array, sizeof(world_cap_increase_array));
-	//Memory::WriteByte(0x009EA032, 0xFF);//map
 	Memory::WriteInt(0x009EA030 + 2, 0xB4);
-
-	// 大地图居中
 	wordMapX = (m_nGameWidth - 666) / 2;
 	wordMapY = (m_nGameHeight - 524) / 2;
 	Memory::CodeCave(wordMapUIcc, 0x009EB594, 13);

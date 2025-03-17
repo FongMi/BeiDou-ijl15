@@ -995,7 +995,6 @@ __declspec(naked) void fixMouseWheelHook() {
 	}
 }
 
-// ARRAYS ---- 长键盘开始
 unsigned char Array_aDefaultQKM[] = {
 	42, 0, 0, 0,
 	82, 0, 0, 0,
@@ -1315,8 +1314,6 @@ _declspec(naked) void Restore_Array_Expanded() //Thank you Max
 		ret;
 	}
 }
-// 长键盘结束
-
 
 DWORD fixDateFormatRtnAddr = 0x008EBF65;
 __declspec(naked) void fixDateFormat() {
@@ -1454,14 +1451,14 @@ __declspec(naked) void chatTextPos()
 		cmp[edi + 0D00h], 2
 		jz label_type2
 
-		label_type1 :        // 状态1 收缩
+		label_type1 :
 		sub eax, 1
 		jmp label_rtn
 
-		label_type2 :        // 状态2 收缩 + 输入
+		label_type2 :
 		jmp label_rtn
 
-		label_type3 :        // 状态3 展开
+		label_type3 :
 		sub eax, 2
 
 		label_rtn :
