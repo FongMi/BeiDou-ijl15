@@ -456,7 +456,7 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x00522C87 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up //Guild Invite
 	Memory::WriteInt(0x0052379F + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x00523991 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523BC5 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
+	//Memory::WriteInt(0x00523BC5 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x00523DC5 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x00523FB7 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x005243EF + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
