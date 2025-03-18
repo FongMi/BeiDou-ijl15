@@ -454,6 +454,8 @@ void Client::UpdateResolution() {
 
 	Memory::WriteInt(0x007C2531 + 1, m_nGameHeight - 80);//??
 
+	Memory::WriteInt(0x0089B796 + 1, m_nGameHeight - 18);//???related to exp gain/item pick up msg //??!!found in another diff also !!!!!!!!!!!!
+
 	Memory::WriteInt(0x00849E39 + 1, m_nGameHeight - 177); //system menu pop up
 	Memory::WriteInt(0x0084A5B7 + 1, m_nGameHeight - 281); //shortcuts pop up	//0x84A5BD -  System Options "X" Position. if needed
 
