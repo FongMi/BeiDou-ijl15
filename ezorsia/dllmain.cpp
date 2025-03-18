@@ -78,7 +78,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::UpdateResolution();
 		Client::FixMouseWheel();
 		Client::Chinese();
-		Client::LongQuickSlot();
+		//Client::LongQuickSlot();
 		Client::FixDateFormat();
 		Client::FixItemType();
 		Client::JumpCap();
