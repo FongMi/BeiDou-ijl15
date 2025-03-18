@@ -413,8 +413,6 @@ void Client::UpdateResolution() {
 
 	Memory::WriteInt(0x00BE273C, 128);//??
 	Memory::WriteByte(0x00A5FC2B, 0x05);//??
-	//Memory::WriteByte(0x008D1790 + 2, 0x01); //related to quickslots area presence		 originally 1U but changed because unsigned int crashes it after char select
-	Memory::WriteByte(0x0089B636 + 2, 0x01); //related to exp gain/item pick up msg, seems to affect msg height ! originally 1U but changed because unsigned int crashes it after char select
 	Memory::WriteByte(0x00592A06 + 1, 0x01);//???likely related to mouse pos
 
 	Memory::WriteInt(0x00744EB4 + 1, m_nGameWidth);//??related to in-game taking screenshot functionality
@@ -422,8 +420,6 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x00744E2A + 1, 3 * m_nGameWidth * m_nGameHeight);//??related to in-game taking screenshot functionality
 	Memory::WriteInt(0x00744E43 + 1, m_nGameWidth * m_nGameHeight);//??related to in-game taking screenshot functionality
 	Memory::WriteInt(0x00744DA6 + 1, 4 * m_nGameWidth * m_nGameHeight);//??related to in-game taking screenshot functionality
-
-	Memory::WriteInt(0x00897BB4 + 1, (m_nGameWidth / 2) - 143);//??related to exp gain/item pick up msg
 
 	if (WindowedMode) {
 		unsigned char forced_window[] = { 0xb8, 0x00, 0x00, 0x00, 0x00 }; //force window mode	//thanks stelmo for showing me how to do this
@@ -433,28 +429,8 @@ void Client::UpdateResolution() {
 		Memory::FillBytes(0x0062EE54, 0x90, 21);	//no Logo @launch //Thanks Denki!!
 	}
 
-	int msgAmntOffset, msgAmnt; msgAmnt = MsgAmount; msgAmntOffset = msgAmnt * 14;
-
-	Memory::WriteInt(0x0089B639 + 1, m_nGameHeight - 6 - msgAmntOffset - 67);//inventory/exp gain y axis //####hd100 //90
-	Memory::WriteInt(0x0089B6F7 + 1, m_nGameWidth - 405);//inventory/exp gain x axis //310 //####hd415 //405
-
-	Memory::WriteInt(0x0089AF33 + 1, 400);//length of pick up and exp gain message canvas //found with help from Davi
-	Memory::WriteInt(0x0089B2C6 + 1, 400);//address to move the message in the canvas adjusted above to the center of the new canvas  //thanks chris
-
-	Memory::WriteInt(0x0089AEE2 + 3, msgAmnt);//moregainmsgs part 1
-	MoreGainMsgsOffset = msgAmnt;	//param for ccmoregainmssgs
-	Memory::CodeCave(ccMoreGainMsgs, dwMoreGainMsgs, MoreGainMsgsNOPs); //moregainmsgs part 2
-	MoreGainMsgsFadeOffset = 15000;	//param for ccmoregainmssgsFade
-	Memory::CodeCave(ccMoreGainMsgsFade, dwMoreGainMsgsFade, MoreGainMsgsFadeNOPs); //moregainmsgsFade
-	MoreGainMsgsFade1Offset = 255 * 4 / 3;	//param for ccmoregainmssgsFade
-	Memory::CodeCave(ccMoreGainMsgsFade1, dwMoreGainMsgsFade1, MoreGainMsgsFade1NOPs); //moregainmsgsFade1
-
 	Memory::WriteInt(0x0045B337 + 1, m_nGameWidth);//related to smega display  //likely screen area where pop up starts for smega
 	Memory::WriteInt(0x0045B417 + 1, m_nGameWidth - 225);//smega with avatar x axis for duration on screen
-
-	Memory::WriteInt(0x007C2531 + 1, m_nGameHeight - 80);//??
-
-	Memory::WriteInt(0x0089B796 + 1, m_nGameHeight - 18);//???related to exp gain/item pick up msg //??!!found in another diff also !!!!!!!!!!!!
 
 	Memory::WriteInt(0x00849E39 + 1, m_nGameHeight - 177); //system menu pop up
 	Memory::WriteInt(0x0084A5B7 + 1, m_nGameHeight - 281); //shortcuts pop up	//0x84A5BD -  System Options "X" Position. if needed
@@ -471,9 +447,9 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x00523FA3 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x005243DB + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x00523154 + 1, m_nGameHeight - 102); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x0052418C + 1, m_nGameHeight - 102); //party quest available pop-up y axis my first address find own my own
 
 	int reqPopOffset = 41;
-	Memory::WriteInt(0x0052418C + 1, m_nGameHeight - 102); //party quest available pop-up y axis my first address find own my own
 	Memory::WriteInt(0x00523092 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up //trade
 	Memory::WriteInt(0x0052336D + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up //Party Invite
 	Memory::WriteInt(0x00522E79 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up //friend request
