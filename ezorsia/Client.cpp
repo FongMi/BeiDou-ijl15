@@ -819,9 +819,34 @@ void Client::MoreHook() {
 		Memory::CodeCave(apDetailBtn, 0x008C4E1B, 7);
 	}
 
+	// trump
 	Memory::WriteInt(0x0045A5BE + 1, 9999);
+
+	// Save window location
 	Memory::WriteInt(0x0049D218 + 1, m_nGameWidth - 16);
 	Memory::WriteInt(0x0049D268 + 1, m_nGameHeight - 16);
+
+	// Unlimited Flash Jump
+	Memory::PatchNop(0x095071D, 2);
+	Memory::PatchNop(0x096BF91, 6);
+	Memory::PatchNop(0x096BF1B, 2);
+
+	// Move While Using Skills
+	Memory::WriteByte(0x0095F97A, 0xEB);
+	Memory::WriteByte(0x0095F97A + 1, 0x59);
+	Memory::WriteByte(0x009CBFB0, 0xEB);
+	Memory::FillBytes(0x0094C3BB, 0x90, 6);
+
+	// Teleport on air
+	Memory::FillBytes(0x00957C2D, 0x90, 6);
+
+	// Lacking Level Check Removal
+	Memory::WriteByte(0x008AD01A, 0xE9);
+	Memory::WriteInt(0x008AD01A + 1, 0x008AD227 - (0x008AD01A + 5));
+
+	// Make NX items droppable
+	Memory::FillBytes(0x004F350C, 0x90, 6);
+	Memory::FillBytes(0x004F351E, 0x90, 6);
 }
 
 void Client::WorldMap()
@@ -832,10 +857,4 @@ void Client::WorldMap()
 	wordMapX = (m_nGameWidth - 666) / 2;
 	wordMapY = (m_nGameHeight - 524) / 2;
 	Memory::CodeCave(wordMapUIcc, 0x009EB594, 13);
-}
-
-void Client::UnlimitedFlashJump() {
-	Memory::PatchNop(0x095071D, 2);
-	Memory::PatchNop(0x096BF91, 6);
-	Memory::PatchNop(0x096BF1B, 2);
 }
