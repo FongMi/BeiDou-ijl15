@@ -128,3 +128,7 @@ void Memory::CodeCave(void* ptrCodeCave, const DWORD dwOriginAddress, const int 
 		WriteInt(dwOriginAddress + 1, (int)(((int)ptrCodeCave - (int)dwOriginAddress) - 5)); // [jmp(1 byte)][address(4 bytes)] //this means you need to clear a space of at least 5 bytes (nNOPCount bytes)
 	} __except (EXCEPTION_EXECUTE_HANDLER) {}
 }
+
+void Memory::PatchNop(const DWORD dwOriginAddress, const int nCount) {
+    FillBytes(dwOriginAddress, 0x90, nCount);
+}

@@ -833,3 +833,9 @@ void Client::WorldMap()
 	wordMapY = (m_nGameHeight - 524) / 2;
 	Memory::CodeCave(wordMapUIcc, 0x009EB594, 13);
 }
+
+void Client::UnlimitedFlashJump() {
+	Memory::PatchNop(0x095071D, 2);
+	Memory::PatchNop(0x096BF91, 6);
+	Memory::PatchNop(0x096BF1B, 2);
+}
