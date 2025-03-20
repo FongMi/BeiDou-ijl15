@@ -791,11 +791,6 @@ void Client::NoPassword() {
 
 void Client::MoreHook() {
 	Memory::WriteInt(0x009A3D81, 480);
-	Memory::WriteByte(0x008EC4A7 + 1, 0x23);
-	Memory::WriteByte(0x008EC53C + 1, 0x4D);
-	Memory::WriteByte(0x008EC5D1 + 1, 0x7A);
-	Memory::WriteByte(0x008EC660 + 1, 0xA9);
-	Memory::WriteByte(0x008EC6CF + 1, 0xC8);
 	Memory::CodeCave(faceHairCave, 0x005C94F3, 18);
 	Memory::CodeCave(canSendPkgTimeCave, 0x00485C28, 10);
 
