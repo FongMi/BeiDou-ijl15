@@ -4,10 +4,8 @@
 #include "FixIme.h"
 #include "FixBuddy.h"
 
-int Client::m_nGameHeight = 720;
-int Client::m_nGameWidth = 1280;
-int Client::MsgAmount = 26;
-bool Client::CustomLoginFrame = true;
+int Client::m_nGameWidth = 800;
+int Client::m_nGameHeight = 600;
 bool Client::WindowedMode = true;
 bool Client::RemoveLogos = true;
 int Client::setDamageCap = 199999;
@@ -15,12 +13,9 @@ int Client::setMAtkCap = 1999;
 int Client::setAccCap = 999;
 int Client::setAvdCap = 999;
 double Client::setAtkOutCap = 199999;
-bool Client::useTubi = false;
-bool Client::bigLoginFrame = false;
-bool Client::SwitchChinese = false;
+bool Client::useTubi = true;
+bool Client::SwitchChinese = true;
 int Client::speedMovementCap = 140;
-bool Client::noPassword = false;
-bool Client::debug = false;
 bool Client::climbSpeedAuto = false;
 float Client::climbSpeed = 1.0;
 unsigned char Client::imeType = 1;
@@ -98,14 +93,6 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(dwTempStatCoolTimeVPos + 2, (m_nGameHeight / 2) - 23);	//sub ebx,277 ; Skill icon cooltime y-pos
 	Memory::WriteInt(dwTempStatCoolTimeHPos + 3, (m_nGameWidth / 2) - 3);	//lea eax,[eax+esi+397] ; Skill icon cooltime x-pos
 
-	//Memory::WriteInt(dwQuickSlotInitHPos + 1, 815); //push 647 //hd800
-	//Memory::WriteInt(dwQuickSlotInitVPos + 1, m_nGameHeight + 1);//add eax,533
-	//Memory::WriteInt(dwQuickSlotVPos + 2, m_nGameHeight + 1);//add esi,533
-	//Memory::WriteInt(dwQuickSlotHPos + 1, 815); //push 647 //hd800
-	//Memory::WriteInt(dwQuickSlotCWndVPos + 2, (600 - m_nGameHeight) / 2 - 427 - 20); //lea edi,[eax-427]
-	//Memory::WriteInt(dwQuickSlotCWndHPos + 2, -815); //lea ebx,[eax-647]
-
-	//Memory::WriteInt(dwByteAvatarMegaHPos + 1, m_nGameWidth + 100); //push 800 ; CAvatarMegaphone::ByeAvatarMegaphone ; IWzVector2D::RelMove ##BAK
 	Memory::WriteInt(dwByteAvatarMegaHPos + 1, m_nGameWidth); //push 800 ; CAvatarMegaphone::ByeAvatarMegaphone ; IWzVector2D::RelMove
 	Memory::WriteInt(dwAvatarMegaWidth + 1, m_nGameWidth); //push 800 ; CAvatarMegaphone ; CreateWnd
 
@@ -127,12 +114,7 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x009966D2 + 1, m_nGameWidth - 100);	//mov edx,700 ; CreateDlg
 	Memory::WriteInt(0x009A3E7F + 1, m_nGameHeight);//mov edx,600
 	Memory::WriteInt(0x009A3E72 + 1, m_nGameWidth);	//mov edx,800 ; CreateDlg
-	//Memory::WriteInt(0x0045B898 + 1, m_nGameHeight - 25);	//push 575
 	Memory::WriteInt(0x0045B898 + 1, m_nGameWidth - 225);	//push 575 ##ED  //smega x axis fade
-	//Memory::WriteInt(0x0045B97E + 1, m_nGameWidth);	//push 800 ; RelMove? ##REDUN
-	//Memory::WriteInt(0x004D9BD1 + 1, m_nGameWidth);	//push 800	; StringPool#1443 (BtMouseCilck)		//click ???related?? for tabs and numbers in cash shop
-	//Memory::WriteInt(0x004D9C37 + 1, m_nGameWidth);	//push 800	; StringPool#1443 (BtMouseCilck)		//click ???related?? for tabs and numbers in cash shop
-	//Memory::WriteInt(0x004D9C84 + 1, m_nGameWidth);	//push 800 ; StringPool#1443 (BtMouseCilck)		//click ???related?? for tabs and numbers in cash shop
 	Memory::WriteInt(0x005386F0 + 1, m_nGameHeight);//push 600
 	Memory::WriteInt(0x005386F5 + 1, m_nGameWidth);	//push 800 ; CField::DrawFearEffect
 	Memory::WriteInt(0x0055B808 + 1, m_nGameHeight);//push 600
@@ -224,7 +206,6 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x005F464D + 1, (unsigned int)floor(m_nGameWidth / 2));//??related to login game frame
 
 	Memory::WriteInt(0x0060411C + 1, m_nGameHeight);//push 600
-	//Memory::WriteInt(0x00604126 + 1, floor(-m_nGameWidth / 2));	//push -300 //moves characters side to side on char select //unnecessary atm
 	Memory::WriteInt(0x0060F79B + 1, (m_nGameHeight / 2) - 201);//??possibly related to login utildlg
 	Memory::WriteInt(0x0060F7A4 + 1, (m_nGameHeight / 2) - 181);//??possibly related to login utildlg
 	Memory::WriteInt(0x0060F7AC + 1, (m_nGameWidth / 2) - 201);//??possibly related to login utildlg
@@ -367,7 +348,6 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(0x00522C87 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up //Guild Invite
 	Memory::WriteInt(0x0052379F + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x00523991 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
-	//Memory::WriteInt(0x00523BC5 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x00523DC5 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x00523FB7 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
 	Memory::WriteInt(0x005243EF + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up
@@ -377,12 +357,8 @@ void Client::UpdateResolution() {
 	Memory::WriteByte(0x00534370, 0xb9); //boss bar	extend to window
 	Memory::WriteInt(0x00534370 + 1, m_nGameWidth - 22); //boss bar	extend to window
 
-	//myHeight = -(Client::m_nGameHeight - 600) / 2;//cash shop fix for frame area	//recalc offsets
-	//myWidth = -(Client::m_nGameWidth - 800) / 2;//cash shop fix for frame area		//recalc offsets
-	//Memory::CodeCave(CashShopFix, dwCashFix, 6);//cash shop fix for frame area //moves frame to top left (not used rn)
-
 	myHeight = (Client::m_nGameHeight - 600) / 2;//cash shop fix for frame area	//recalc offsets
-	myWidth = (Client::m_nGameWidth - 800) / 2;//cash shop fix for frame area		//recalc offsets
+	myWidth = (Client::m_nGameWidth - 800) / 2;//cash shop fix for frame area //recalc offsets
 
 	nHeightOfsetted1 = 316; nWidthOfsetted1 = 256; nTopOfsetted1 = 0 + myHeight; nLeftOfsetted1 = 0 + myWidth; //parameters for fix1
 	Memory::CodeCave(CashShopFix1, dwCashFix1, dwCashFix1NOPs);
@@ -425,45 +401,26 @@ void Client::UpdateResolution() {
 
 	Memory::WriteInt(0x00641F61 + 1, (unsigned int)floor(m_nGameWidth / 2));	//mov ebc,400 ;  VRleft		//camera movement
 	Memory::WriteInt(0x00641FC8 + 1, (unsigned int)floor(m_nGameHeight / 2));	//add eax,300  ; VRTop //camera movement //not working for most maps
-	//Memory::WriteInt(0x0064202F + 2, (unsigned int)floor(m_nGameWidth / 2));	//mov ebc,400 ;  VRright		//camera movement	//crashes
 	Memory::WriteInt(0x0064208F + 1, (unsigned int)floor(m_nGameHeight / 2));	//add eax,300  ; VRbottom //camera movement //not working for most maps
 
 	myAlwaysViewRestoreFixOffset = myHeight; //parameters for fix view restore all maps number ?????working????!!!
 	Memory::CodeCave(AlwaysViewRestoreFix, dwAlwaysViewRestoreFix, dwAlwaysViewRestoreFixNOPs);	//fix view restora on all maps, currently does nothing; i likely looked in the wrong area
 
-	if (CustomLoginFrame) {
-		Memory::WriteInt(0x005F481E + 1, (unsigned int)floor(-m_nGameHeight / 2));//push -300				!!game login frame!! turn this on if you edit UI.wz and use a frame that matches your res
-		Memory::WriteInt(0x005F4824 + 1, (unsigned int)floor(-m_nGameWidth / 2));	//push -400 ; RelMove?				!!game login frame!! turn this on if you edit UI.wz and use a frame that matches your res
-	}
-	//nHeightOfsettedloginFrameFix = 0 + myHeight; nWidthOfsettedloginFrameFix = 0 + myWidth;
-	//nTopOfsettedloginFrameFix = 0 + myHeight; nLeftOfsettedloginFrameFix = 0 + myWidth; //parameters for fix cash preview
-	//Memory::CodeCave(loginFrameFix, dwloginFrameFix, loginFrameFixNOPs); //failed login frame fix =(
+	nTopOfsettedVerFix = 10 + myHeight; nLeftOfsettedVerFix = 645 + myWidth; //parameters for fix version number
+	Memory::CodeCave(VersionNumberFix, dwVersionNumberFix, dwVersionNumberFixNOPs);	//game version number fix //use this if you use no frame or default client frame
 
-	if (bigLoginFrame) {
-		Memory::WriteInt(0x005F464D + 1, m_nGameWidth - 165);	//mov eax,800 ; RelMove?	//game version number for login frames that hug the side of the screen //you will still need to offset ntop, and that may require a code cave if your height resolution is too big
-	}
-	else {
-		nTopOfsettedVerFix = 10 + myHeight; nLeftOfsettedVerFix = 645 + myWidth; //parameters for fix version number
-		Memory::CodeCave(VersionNumberFix, dwVersionNumberFix, dwVersionNumberFixNOPs);	//game version number fix //use this if you use no frame or default client frame
-	}
+	nHeightOfsettedLoginBackCanvasFix = 352 + myHeight; nWidthOfsettedLoginBackCanvasFix = 125 + myWidth;//para for world select buttonsViewRec
+	nTopOfsettedLoginBackCanvasFix = 125 + myHeight; nLeftOfsettedLoginBackCanvasFix = 0 + myWidth;
+	Memory::CodeCave(ccLoginBackCanvasFix, dwLoginBackCanvasFix, LoginBackCanvasFixNOPs);	//world select buttons fix		//thank you teto for pointing out my error in finding the constructor
 
-	if (!bigLoginFrame) {
-		nHeightOfsettedLoginBackCanvasFix = 352 + myHeight; nWidthOfsettedLoginBackCanvasFix = 125 + myWidth;//para for world select buttonsViewRec
-		nTopOfsettedLoginBackCanvasFix = 125 + myHeight; nLeftOfsettedLoginBackCanvasFix = 0 + myWidth;
-		Memory::CodeCave(ccLoginBackCanvasFix, dwLoginBackCanvasFix, LoginBackCanvasFixNOPs);	//world select buttons fix		//thank you teto for pointing out my error in finding the constructor
+	nHeightOfsettedLoginViewRecFix = 167 + myHeight; nWidthOfsettedLoginViewRecFix = 540 + myWidth;//para for ViewRec fix
+	nTopOfsettedLoginViewRecFix = 51 + myHeight; nLeftOfsettedLoginViewRecFix = 136 + myWidth;
+	Memory::CodeCave(ccLoginViewRecFix, dwLoginViewRecFix, LoginViewRecFixNOPs);	//world ViewRec fix	
 
-		//yOffsetOfLoginBackBtnFix = 300 + myHeight; xOffsetOfLoginBackBtnFix = 0 + myWidth;	//para for back button
-		//Memory::CodeCave(ccLoginBackBtnFix, dwLoginBackBtnFix, LoginBackBtnFixNOPs); //back button on world select //unnecessary as buttons move with canvas
-
-		nHeightOfsettedLoginViewRecFix = 167 + myHeight; nWidthOfsettedLoginViewRecFix = 540 + myWidth;//para for ViewRec fix
-		nTopOfsettedLoginViewRecFix = 51 + myHeight; nLeftOfsettedLoginViewRecFix = 136 + myWidth;
-		Memory::CodeCave(ccLoginViewRecFix, dwLoginViewRecFix, LoginViewRecFixNOPs);	//world ViewRec fix	
-
-		a1x = 0 + myWidth; a2x = -149 + myWidth; a2y = 0 + myHeight; a3 = 25; a1y = -250; //a4 = 0;	//LoginDescriptor params
-		Memory::WriteInt(0x0060D849 + 1, 300 + a1y); //speed 1	//temporary fix by increasing the speed of display until i get good enough at procedural programming 
-		//and memory management and reverse engineering to use nexon's own functions to put a black layer with greater z value to cover the tabs being shown off screen at origin
-		Memory::CodeCave(ccLoginDescriptorFix, dwLoginDescriptorFix, LoginDescriptorFixNOPs);	//world LoginDescriptor fix	
-	}
+	a1x = 0 + myWidth; a2x = -149 + myWidth; a2y = 0 + myHeight; a3 = 25; a1y = -250; //a4 = 0;	//LoginDescriptor params
+	Memory::WriteInt(0x0060D849 + 1, 300 + a1y); //speed 1	//temporary fix by increasing the speed of display until i get good enough at procedural programming 
+	//and memory management and reverse engineering to use nexon's own functions to put a black layer with greater z value to cover the tabs being shown off screen at origin
+	Memory::CodeCave(ccLoginDescriptorFix, dwLoginDescriptorFix, LoginDescriptorFixNOPs);	//world LoginDescriptor fix	
 
 	int customEngY = -62, customEngX = -22, dojangYoffset = 0;	//myHeight //-55-35 (myHeight*250/100)	-(myWidth*53/100) 140 -130
 	yOffsetOfMuruengraidPlayer = 50 + dojangYoffset; xOffsetOfMuruengraidPlayer = 169 + myWidth; //params
@@ -484,35 +441,10 @@ void Client::UpdateResolution() {
 	Memory::CodeCave(ccMuruengraidEngBar2, dwMuruengraidEngBar2, MuruengraidEngBar2NOPs);	//muruengraid scaling	
 	yOffsetOfMuruengraidClearRoundUI = 260 + myHeight; xOffsetOfMuruengraidClearRoundUI = 400 + myWidth; //params
 	Memory::CodeCave(ccMuruengraidClearRoundUI, dwMuruengraidClearRoundUI, MuruengraidClearRoundUINOPs);	//muruengraid scaling
-	//yOffsetOfMuruengraidTimerCanvas = 28 + dojangYoffset; xOffsetOfMuruengraidTimerCanvas = 112 + myWidth; //params
-	//Memory::CodeCave(ccMuruengraidTimerCanvas, dwMuruengraidTimerCanvas, MuruengraidTimerCanvasNOPs);	//muruengraid scaling	
-	//yOffsetOfMuruengraidTimerMinutes = 0 + dojangYoffset; xOffsetOfMuruengraidTimerMinutes = 0 + myWidth; //params	//not needed, bar moves all, kept for referrence or if change are needed
-	//Memory::CodeCave(ccMuruengraidTimerMinutes, dwMuruengraidTimerMinutes, MuruengraidTimerMinutesNOPs);	//muruengraid scaling	
-	//yOffsetOfMuruengraidTimerSeconds = 0 + dojangYoffset; xOffsetOfMuruengraidTimerSeconds = 68 + myWidth; //params
-	//Memory::CodeCave(ccMuruengraidTimerSeconds, dwMuruengraidTimerSeconds, MuruengraidTimerSecondsNOPs);	//muruengraid scaling
 	yOffsetOfMuruengraidTimerBar = 16 + dojangYoffset; xOffsetOfMuruengraidTimerBar = 345 + myWidth; //params
 	Memory::CodeCave(ccMuruengraidTimerBar, dwMuruengraidTimerBar, MuruengraidTimerBarNOPs);	//muruengraid scaling
 	xOffsetOfMuruengraidMonster1_2 = 318 + myWidth; //params	//finally fixed this bugger
 	Memory::CodeCave(ccMuruengraidMonster1_2, dwMuruengraidMonster1_2, MuruengraidMonster1_2NOPs);	//muruengraid scaling
-
-	//testingOut("IWzProperty__GetItem _this: 0x%x, result: 0x%x, sPath: %s");//, _this, result, (char*)sPath);
-
-	//int myStatsWindowOffsetVal = 4, myStatsWindowOffset = 176, myStatsWindowOffset1 = 177;
-	//Memory::WriteInt(0x008C4AB3 + 1, myStatsWindowOffset); //stat window ty resinate
-	//Memory::WriteInt(0x008C510A + 1, myStatsWindowOffset1); //stat window ty resinate
-	
-	//const char* testString = "RoSWzFile"; Memory::WriteString(0x00B3F434, testString);//testing
-	//Memory::WriteInt(0x009F74EA + 3, 16); //testing
-	//Memory::WriteInt(0x008C4286 + 1, 400); //testing
-	//Memory::WriteInt(0x00780743 + 3, 400); //testing
-	//Memory::WriteByte(0x004289C0 + 1, 99); //testing
-	//Memory::FillBytes(0x00485C01, 0x90, 2);
-	//Memory::FillBytes(0x00485C21, 0x90, 2);
-
-	//Memory::CodeCave(testingCodeCave, dwTesting, TestingNOPs); //testing
-	//Memory::CodeCave(testingCodeCave2, dwTesting2, Testing2NOPs); //testing
-	//Memory::CodeCave(testingCodeCave3, dwTesting3, Testing3NOPs); //testing
-	//Memory::CodeCave(testingCodeCave4, dwTesting4, Testing4NOPs); //testing
 
 	darkCircleX = m_nGameWidth / 2 - 163;
 	darkCircleY = m_nGameHeight / 2 - 190;
@@ -569,90 +501,6 @@ void Client::Chinese() {
 	}
 }
 
-void Client::LongQuickSlot() {
-	// CUIStatusBar::OnCreate
-	Memory::WriteByte(0x008D155C + 1, 0xF0); // Draw rest of quickslot bar
-	Memory::WriteByte(0x008D155C + 2, 0x03);
-	Memory::WriteByte(0x008D182E + 1, 0xF0); // Draw rest of hotkeys
-	Memory::WriteByte(0x008D182E + 2, 0x03);
-	Memory::WriteByte(0x008D1AC0 + 1, 0xF0); // Draw rest of cooldowns, who tf knows why. TY Rulax
-	Memory::WriteByte(0x008D1AC0 + 2, 0x03);
-
-	//----CQuickslotKeyMappedMan::CQuickslotKeyMappedMan?????
-	Memory::WriteInt(0x0072B7CE + 1, (DWORD)&Array_aDefaultQKM_0);
-	Memory::WriteInt(0x0072B8EB + 1, (DWORD)&Array_aDefaultQKM_0);
-
-	//----CUIStatusBar::CQuickSlot::CompareValidateFuncKeyMappedInfo
-	Memory::WriteByte(0x008DD916, 0x1A); // increase 8 --> 26
-	Memory::WriteByte(0x008DD8AD, 0x1A); // increase 8 --> 26
-	Memory::WriteByte(0x008DD8FD, 0xBB);
-	Memory::WriteInt(0x008DD8FD + 1, (DWORD)&Array_Expanded);
-	Memory::WriteByte(0x008DD8FD + 5, 0x90); //Errant byte
-	Memory::WriteByte(0x008DD898, 0xB8);
-	Memory::WriteInt(0x008DD898 + 1, (DWORD)&Array_Expanded);
-	Memory::WriteByte(0x008DD898 + 5, 0x90); //Errant Byte
-
-	//----CUIStatusBar::CQuickSlot::Draw
-	Memory::WriteByte(0x008DE75E + 3, 0x6C);
-	Memory::WriteByte(0x008DDF99, 0xB8);
-	Memory::WriteInt(0x008DDF99 + 1, (DWORD)&Array_Expanded);
-	Memory::FillBytes(0x008DDF99 + 5, 0x90, 3); // Nopping errant operations
-
-	//----CUIStatusBar::OnMouseMove
-	Memory::WriteByte(0x008D7F1E + 1, 0x34);
-	Memory::WriteByte(0x008D7F1E + 2, 0x85);
-	Memory::WriteInt(0x008D7F1E + 3, (DWORD)&Array_Expanded);
-
-	//----CUIStatusBar::CQuickSlot::GetPosByIndex
-	Memory::WriteInt(0x008DE94D + 2, (DWORD)&Array_ptShortKeyPos);
-	Memory::WriteInt(0x008DE955 + 2, (DWORD)&Array_ptShortKeyPos + 4);
-	Memory::WriteByte(0x008DE941 + 2, 0x1A); //change cmp 8 --> cmp 26
-
-	//CUIStatusBar::GetShortCutIndexByPos
-	Memory::WriteInt(0x008DE8F4 + 1, (DWORD)&Array_ptShortKeyPos_Fixed_Tooltips + 4);
-	Memory::WriteByte(0x008DE926 + 1, 0x3E);
-
-	//CUIStatusBar::CQuickSlot::DrawSkillCooltime
-	Memory::WriteByte(0x008E099F + 3, 0x1A);
-	Memory::WriteByte(0x008E069D, 0xBE);
-	Memory::WriteInt(0x008E069D + 1, (DWORD)&cooldown_Array); //Pass enlarged FFFFF array
-	Memory::WriteByte(0x008E069D + 5, 0x90); //Errant byte
-	Memory::WriteByte(0x008E06A3, 0xBF);
-	Memory::WriteInt(0x008E06A3 + 1, (DWORD)&Array_Expanded + 1);
-	Memory::WriteByte(0x008E06A3 + 5, 0x90);
-
-	//----CDraggableMenu::OnDropped
-	Memory::WriteByte(0x004F928A + 2, 0x1A); //change cmp 8 --> cmp 26
-	//----CDraggableMenu::MapFuncKey
-	Memory::WriteByte(0x004F93F9 + 2, 0x1A); //change cmp 8 --> cmp 26
-	//----CUIKeyConfig::OnDestroy
-	Memory::WriteByte(0x00833797 + 2, 0x6C); // Updates the offset to 108 (triple) (old->24h)
-	Memory::WriteByte(0x00833841 + 2, 0x6C); // Updates the offset to 108 (triple) (old->24h)
-	Memory::WriteByte(0x00833791 + 1, 0x68); // push 68h (triple)
-	Memory::WriteByte(0x0083383B + 1, 0x68); // push 68h (triple)
-	//----CUIKeyConfig::~CUIKeyConfig
-	Memory::WriteByte(0x0083287F + 2, 0x6C); // triple the base value at this hex (old->24h)
-	Memory::WriteByte(0x00832882 + 1, 0x68); // push 68h (triple)
-	//----CQuickslotKeyMappedMan::SaveQuickslotKeyMap
-	Memory::WriteByte(0x0072B8C0 + 2, 0x6C); // triple the base value at this hex (old->24h)
-	Memory::WriteByte(0x0072B8A0 + 1, 0x68); // push 68h, (triple) //CQuickslotKeyMappedMan::SaveQuickslotKeyMap
-	Memory::WriteByte(0x0072B8BD + 1, 0x68); // push 68h, (triple) //CQuickslotKeyMappedMan::SaveQuickslotKeyMap
-	//----CQuickslotKeyMappedMan::OnInit
-	Memory::WriteByte(0x0072B861 + 1, 0x68); // push 68h (triple) (these ones might have to be just 60)
-	Memory::WriteByte(0x0072B867 + 2, 0x6C); // triple the base value at this hex (old->24h)
-	//----CUIKeyConfig::CNoticeDlg::OnChildNotify????
-	Memory::WriteByte(0x00836A1E + 1, 0x68); // push 68h (triple)
-	Memory::WriteByte(0x00836A21 + 2, 0x6C); // triple the base value at this hex (old->24h)
-
-
-	// CODECAVES CLIENT EDITS ---- 
-	Memory::CodeCave(CompareValidateFuncKeyMappedInfo_cave, 0x8DD8B8, 5);
-	Memory::CodeCave(sub_9FA0CB_cave, 0x9FA0DB, 5);
-	Memory::CodeCave(sDefaultQuickslotKeyMap_cave, 0x72B7BC, 5);
-	Memory::CodeCave(DefaultQuickslotKeyMap_cave, 0x72B8E6, 5);
-	Memory::CodeCave(Restore_Array_Expanded, 0x008CFDFD, 6); //restores the skill array to 0s
-}
-
 void Client::FixDateFormat() {
 	if (SwitchChinese)
 	{
@@ -693,13 +541,6 @@ void Client::FixChatPosHook() {
 	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
 }
 
-void Client::NoPassword() {
-	if (noPassword && debug)
-	{
-		Memory::WriteInt(0x00620F2F + 2, 0);
-	}
-}
-
 void Client::MoreHook() {
 	Memory::WriteInt(0x009A3D81, 480);
 	Memory::CodeCave(faceHairCave, 0x005C94F3, 18);
@@ -727,10 +568,6 @@ void Client::MoreHook() {
 
 	// trump
 	Memory::WriteInt(0x0045A5BE + 1, 9999);
-
-	// Save window location
-	Memory::WriteInt(0x0049D218 + 1, m_nGameWidth - 16);
-	Memory::WriteInt(0x0049D268 + 1, m_nGameHeight - 16);
 
 	// Unlimited Flash Jump
 	Memory::PatchNop(0x095071D, 2);

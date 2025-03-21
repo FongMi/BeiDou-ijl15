@@ -1,9 +1,6 @@
 #pragma once
 #include "AutoTypes.h"
 
-static bool ownLoginFrame;
-static bool ownCashShopFrame;
-static bool EzorsiaV2WzIncluded;
 //notes from my knowledge as i have not used these kinds of codes practically well
 //function replacement is when you replace the original function in the client with your own fake function, usually to add some extra functionality
 //for more complex applications you would also need to define the client's variables and reinterpret_cast those (no void this time)
@@ -352,7 +349,7 @@ KeyValuePair newKeyValuePairs[] = {
     {276, "在這裡用不上。"},
     {277, "所在區域無法執行該動作！"},
     {278, "不能到別的島去。"},
-    {279, "使用後可能會有意想不到的後果，\r\n確定要使用嗎？"},
+    {279, "使用後可能會有意想不到的後果，造成無法想像的傷害，確定要使用嗎？"},
     {280, "現在不能聊天。"},
     {281, "得到經驗值 (+%d)"},
     {282, "網咖特別經驗值(+%d)"},
@@ -1032,7 +1029,7 @@ KeyValuePair newKeyValuePairs[] = {
     {2625, "購買人：%s"},
     {2626, "購買的數量：%d"},
     {2627, "總銷售額 / 總收入額"},
-    {2639, "關閉訊息窗，所有訊息都被消除\r\你要繼續進行嗎？"},
+    {2639, "關閉訊息窗，所有訊息都被消除\r\n你要繼續進行嗎？"},
     {2640, "封訊息。"},
     {2641, "收到了"},
     {2642, "新訊息。"},
@@ -2085,51 +2082,12 @@ bool Hook_StringPool__GetString(bool bEnable)	//hook stringpool modification //t
 	_StringPool__GetString_t _StringPool__GetString_Hook = [](void* pThis, void* edx, ZXString<char>* result, unsigned int nIdx, char formal) ->  ZXString<char>*
 	{
 		auto ret = _StringPool__GetString(pThis, edx, result, nIdx, formal);
-        if (nIdx == 1163)
-        {
-            *ret = "BeiDou";
+        for (const auto& pair : newKeyValuePairs) {
+            if (nIdx == pair.key) {
+                *ret = pair.value.c_str();
+                break;
+            }
         }
-		switch (nIdx)
-		{
-			case 1307:	//1307_UI_LOGINIMG_COMMON_FRAME = 51Bh
-				if (EzorsiaV2WzIncluded && !ownLoginFrame) {
-					switch (Client::m_nGameWidth)
-					{
-						case 1280:	//ty teto for the suggestion to use ZXString<char>::Assign and showing me available resources
-							*ret = ("UI/MapleEzorsiaV2wzfiles.img/Common/frame1280"); break;
-						case 1366:
-							*ret = ("UI/MapleEzorsiaV2wzfiles.img/Common/frame1366"); break;
-						case 1600:
-							*ret = ("UI/MapleEzorsiaV2wzfiles.img/Common/frame1600"); break;
-						case 1920:
-							*ret = ("UI/MapleEzorsiaV2wzfiles.img/Common/frame1920"); break;
-						case 1024:
-							*ret = ("UI/MapleEzorsiaV2wzfiles.img/Common/frame1024"); break;
-					}
-					break;
-				}
-			case 1301:	//1301_UI_CASHSHOPIMG_BASE_BACKGRND  = 515h
-				if (EzorsiaV2WzIncluded && !ownCashShopFrame) { *ret = ("UI/MapleEzorsiaV2wzfiles.img/Base/backgrnd"); } break;
-			case 1302:	//1302_UI_CASHSHOPIMG_BASE_BACKGRND1 = 516h
-				if (EzorsiaV2WzIncluded && !ownCashShopFrame) { *ret = ("UI/MapleEzorsiaV2wzfiles.img/Base/backgrnd1"); } break;
-			case 5361:	//5361_UI_CASHSHOPIMG_BASE_BACKGRND2  = 14F1h			
-				if (EzorsiaV2WzIncluded && !ownCashShopFrame) { *ret = ("UI/MapleEzorsiaV2wzfiles.img/Base/backgrnd2"); } break;
-			//case 1302:	//BACKGRND??????
-			//	if (EzorsiaV2WzIncluded && ownCashShopFrame) { *ret = ("UI/MapleEzorsiaV2wzfiles.img/Base/backgrnd1"); } break;
-			//case 5361:	//SP_1937_UI_UIWINDOWIMG_STAT_BACKGRND2  = 791h	
-			//	if (EzorsiaV2WzIncluded && ownCashShopFrame) { *ret = ("UI/MapleEzorsiaV2wzfiles.img/Base/backgrnd2"); } break;
-			default:
-				if (Client::SwitchChinese)
-				{
-					for (const auto& pair : newKeyValuePairs) {
-						if (nIdx == pair.key) {
-							*ret = pair.value.c_str();
-							break;
-						}
-					}
-				}
-				break;
-		}
 		return ret;
 	};
 	return Memory::SetHook(bEnable, reinterpret_cast<void**>(&_StringPool__GetString), _StringPool__GetString_Hook);
