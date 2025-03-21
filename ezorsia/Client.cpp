@@ -59,7 +59,6 @@ void Client::UpdateGameStartup() {
 
 	Memory::WriteDouble(0x00AFE8A0, setAtkOutCap);
 
-
 	Memory::WriteInt(0x00780743 + 3, speedMovementCap); //set speed cap //ty ronan
 	Memory::WriteInt(0x008C4286 + 1, speedMovementCap); //set speed cap //ty ronan
 	Memory::WriteInt(0x0094D91E + 1, speedMovementCap); //set speed cap //ty ronan
@@ -453,30 +452,6 @@ void Client::UpdateResolution() {
 	Memory::CodeCave(darkMap3cc, 0x0055C1C5, 13);
 }
 
-void Client::EnableNewIGCipher() {//??not called //no idea what cipher is
-	const int nCipherHash = m_nIGCipherHash;
-	Memory::WriteInt(dwIGCipherHash + 3, nCipherHash);
-	Memory::WriteInt(dwIGCipherVirtual1 + 3, nCipherHash);
-	Memory::WriteInt(dwIGCipherVirtual2 + 3, nCipherHash);
-	Memory::WriteInt(dwIGCipherDecrypt + 3, nCipherHash);
-	Memory::WriteInt(dwIGCipherDecryptStr + 3, nCipherHash);
-}
-
-void Client::UpdateLogin() {	//un-used //may still contain some useful addresses for custom login
-	Memory::CodeCave(PositionLoginDlg, dwLoginCreateDlg, 14);
-	Memory::CodeCave(PositionLoginUsername, dwLoginUsername, 11);
-	Memory::CodeCave(PositionLoginPassword, dwLoginPassword, 8);
-	Memory::WriteInt(dwLoginInputBackgroundColor + 3, 0xFFF8FAFF); // ARGB value
-	Memory::WriteByte(dwLoginInputFontColor + 3, 1); // bool: true=black, false=white
-	Memory::WriteInt(dwLoginLoginBtn + 1, -127); // x-pos
-	Memory::WriteInt(dwLoginFindPasswordBtn + 1, -127); // x-pos
-	Memory::WriteInt(dwLoginQuitBtn + 1, -127); // x-pos
-	Memory::WriteInt(dwLoginFindIDBtn + 1, -127); // x-pos
-	Memory::WriteByte(dwLoginFindIDBtn + 1, -127); // x-pos
-	Memory::WriteByte(dwLoginWebHomeBtn + 1, -127); // x-pos
-	Memory::WriteByte(dwLoginWebRegisterBtn + 1, -127); // x-pos
-}
-
 void Client::FixMouseWheel() {
 	Memory::CodeCave(fixMouseWheelHook, 0x009E8090, 5);
 }
@@ -489,7 +464,6 @@ void Client::Chinese() {
 	else {
 		FixIme::HookNew();
 	}
-
 	FixBuddy::Hook();
 	if(SwitchChinese) {
 		Memory::WriteString(0x00AF2B28, "¹ïÁp·ù     ");

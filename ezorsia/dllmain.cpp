@@ -61,8 +61,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Hook_lpfn_NextLevel(true);
 
 		Client::UpdateGameStartup();
-
-		std::cout << "Applying resolution " << Client::m_nGameWidth << "x" << Client::m_nGameHeight << std::endl;
 		Client::UpdateResolution();
 		Client::FixMouseWheel();
 		Client::Chinese();
