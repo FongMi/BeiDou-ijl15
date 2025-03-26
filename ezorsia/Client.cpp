@@ -548,12 +548,6 @@ void Client::MoreHook() {
 	Memory::PatchNop(0x096BF91, 6);
 	Memory::PatchNop(0x096BF1B, 2);
 
-	// Move While Using Skills
-	Memory::WriteByte(0x0095F97A, 0xEB);
-	Memory::WriteByte(0x0095F97A + 1, 0x59);
-	Memory::WriteByte(0x009CBFB0, 0xEB);
-	Memory::FillBytes(0x0094C3BB, 0x90, 6);
-
 	// Teleport on air
 	Memory::FillBytes(0x00957C2D, 0x90, 6);
 
