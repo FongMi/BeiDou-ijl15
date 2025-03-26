@@ -524,21 +524,7 @@ void Client::MoreHook() {
 	{
 		Memory::WriteByte(0x004905ED + 1, 5);
 	}
-
 	Memory::WriteInt(0x0049064B + 2, talkTime);
-
-	if (setAtkOutCap > 999999)
-	{
-		Memory::WriteInt(0x008C485A + 1, 192);
-		Memory::WriteInt(0x008C4AB3 + 1, 210);
-		Memory::WriteInt(0x008C510A + 1, 218);
-		Memory::WriteInt(0x008C4EA2 + 1, 210);
-		Memory::WriteInt(0x008C5760 + 1, 210);
-		Memory::WriteInt(0x008C7AD9 + 1, 185);
-		Memory::WriteInt(0x008C2754 + 1, 195);
-		Memory::WriteInt(0x008C6C72 + 1, 210);
-		Memory::CodeCave(apDetailBtn, 0x008C4E1B, 7);
-	}
 
 	// trump
 	Memory::WriteInt(0x0045A5BE + 1, 9999);
