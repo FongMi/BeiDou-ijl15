@@ -80,36 +80,6 @@ static auto _bstr_ctor = reinterpret_cast<_bstr_ctor_t>(0x00406301);
 static _bstr_ctor_t _bstr_ctor_Hook = [](void* pThis, void* edx, const char* str) {
 	return _bstr_ctor(pThis, edx, str); };
 
-//Ztl_bstr_t
-//Ztl_variant_t
-//_Ztl_bstr__ctor_Ztl_bstr_t
-//_com_ptr_t
-//_Ztl_variant_t__dtor_t
-
-//ZXString::assign	00414617 ///v83	//raw data from notes kept for reference in case needed later
-//void __thiscall ZXString<char>::Assign(ZXString<char> *this, const char* s, int n) ?	v95
-//int? __thiscall ZXString<char>::Assign(void* this, char* a2, size_t a3)	v83
-
-//typedef _com_ptr_t* (__cdecl* _get_unknown_t)(_com_ptr_t* result, Ztl_variant_t* v);
-//static auto _get_unknown = reinterpret_cast<_get_unknown_t>(0x00414ADA);
-//static _get_unknown_t _get_unknown_Hook = [](_com_ptr_t* result, Ztl_variant_t* v) {
-//	return _get_unknown(result, v); };
-//
-//typedef Ztl_variant_t* (__cdecl* _get_resource_object_t)(Ztl_variant_t* result, Ztl_bstr_t sUOL); //sUOL example L"NameSpace#FileSystem"
-//static auto _get_resource_object = reinterpret_cast<_get_resource_object_t>(0x00000000);
-//static _get_resource_object_t _get_resource_object_Hook = [](Ztl_variant_t* result, Ztl_bstr_t sUOL) {
-//	return _get_resource_object(result, sUOL); };
-//
-//typedef void (__thiscall* _com_ptr_t_IWzProperty__ctor_t)(_com_ptr_t* pThis, _com_ptr_t* p);
-//static auto _com_ptr_t_IWzProperty__ctor = reinterpret_cast<_com_ptr_t_IWzProperty__ctor_t>(0x00000000);
-//static _com_ptr_t_IWzProperty__ctor_t _com_ptr_t_IWzProperty__ctor_Hook = [](_com_ptr_t* pThis, _com_ptr_t* p) {
-//	return _com_ptr_t_IWzProperty__ctor(pThis, p); };
-//
-//typedef void(__thiscall* _com_ptr_t_IWzProperty__dtor_t)(_com_ptr_t* pThis);
-//static auto _com_ptr_t_IWzProperty__dtor = reinterpret_cast<_com_ptr_t_IWzProperty__dtor_t>(0x00000000);
-//static _com_ptr_t_IWzProperty__dtor_t _com_ptr_t_IWzProperty__dtor_Hook = [](_com_ptr_t* pThis) {
-//	return _com_ptr_t_IWzProperty__dtor(pThis); };
-	
 typedef ZXString<char>*(__fastcall* _StringPool__GetString_t)(void* pThis, void* edx, ZXString<char>* result, unsigned int nIdx, char formal); //also ty to the creators of MapleClientEditTemplate
 static auto _StringPool__GetString = reinterpret_cast<_StringPool__GetString_t>(0x0079E993);//hook stringpool modification //ty !! popcorn //ty darter //ty teto
 

@@ -9,9 +9,7 @@ public:
 	static void FixDateFormat();
 	static void FixItemType();
 	static void JumpCap();
-	static void FixChatPosHook();
 	static void MoreHook();
-	static void WorldMap();
 	static const int m_nIGCipherHash = 0XC65053F2;
 	static int m_nGameHeight;
 	static int m_nGameWidth;
@@ -31,6 +29,4 @@ public:
 	static DWORD jumpCap;
 	static std::string ServerIP_AddressFromINI;
 	static int serverIP_Port;
-	static bool talkRepeat;
-	static int talkTime;
 };

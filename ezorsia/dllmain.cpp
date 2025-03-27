@@ -41,8 +41,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 			Client::serverIP_Port = reader.GetInteger("general", "serverIP_Port", 8484);
 			Client::climbSpeedAuto = reader.GetBoolean("optional", "climbSpeedAuto", false);
 			Client::climbSpeed = reader.GetFloat("optional", "climbSpeed", 1.0);
-			Client::talkRepeat = reader.GetBoolean("optional", "talkRepeat", false);
-			Client::talkTime = reader.GetInteger("optional", "talkTime", 2000);
 		}
 
 		Hook_CreateMutexA(true); //multiclient //ty darter, angel, and alias!
@@ -67,10 +65,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::FixDateFormat();
 		Client::FixItemType();
 		Client::JumpCap();
-		Client::FixChatPosHook();
 		Client::MoreHook();
 		BossHP::Hook();
-		Client::WorldMap();
 		std::cout << "GetModuleFileName hook created" << std::endl;
 		ijl15::CreateHook(); //NMCO::CreateHook();
 		std::cout << "NMCO hook initialized" << std::endl;
