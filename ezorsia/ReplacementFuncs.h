@@ -84,22 +84,6 @@ bool Hook_CreateMutexA(bool bEnable)	//ty darter	//ty angel!
 	return Memory::SetHook(bEnable, reinterpret_cast<void**>(&_CreateMutexA), Hook);
 }
 
-//bool Hook_get_unknown(bool bEnable)
-//{
-//	return Memory::SetHook(bEnable, reinterpret_cast<void**>(&_get_unknown), _get_unknown_Hook);
-//}
-//bool Hook_get_resource_object(bool bEnable)
-//{
-//	return Memory::SetHook(bEnable, reinterpret_cast<void**>(&_get_resource_object), _get_resource_object_Hook);
-//}
-//bool Hook_com_ptr_t_IWzProperty__ctor(bool bEnable)
-//{
-//	return Memory::SetHook(bEnable, reinterpret_cast<void**>(&_com_ptr_t_IWzProperty__ctor), _com_ptr_t_IWzProperty__ctor_Hook);
-//}
-//bool Hook_com_ptr_t_IWzProperty__dtor(bool bEnable)
-//{
-//	return Memory::SetHook(bEnable, reinterpret_cast<void**>(&_com_ptr_t_IWzProperty__dtor), _com_ptr_t_IWzProperty__dtor_Hook);
-//}
 bool HookPcCreateObject_IWzResMan(bool bEnable)
 {
 	return Memory::SetHook(bEnable, reinterpret_cast<void**>(&_PcCreateObject_IWzResMan), _PcCreateObject_IWzResMan_Hook);
@@ -136,54 +120,7 @@ bool HookIWzNameSpace__Mount(bool bEnable)
 bool HookCWvsApp__InitializeResMan(bool bEnable)	//resman hook that does nothing, kept for analysis and referrence //not skilled enough to rewrite to load custom wz files
 {
 	static _CWvsApp__InitializeResMan_t _CWvsApp__InitializeResMan_Hook = [](void* pThis, void* edx) {
-		//-> void {_CWvsApp__InitializeResMan(pThis, edx);
 		_CWvsApp__InitializeResMan(pThis, edx);	//comment this out and uncomment below if testing, supposed to load from .img files in folders but i never got to test it
-		//void* pData = nullptr;
-		//void* pFileSystem = nullptr;
-		//void* pUnkOuter = 0;
-		//void* nPriority = 0;
-		//void* sPath;
-
-		//// Resman
-		//_PcCreateObject_IWzResMan(L"ResMan", g_rm, pUnkOuter);	//?(void*) //?&g
-
-		//void* pIWzResMan_Instance = *g_rm;	//?&g
-		//auto IWzResMan__SetResManParam = *(void(__fastcall**)(void*, void*, void*, int, int, int))((*(int*)pIWzResMan_Instance) + 20); // Hard Coded
-		//IWzResMan__SetResManParam(nullptr, nullptr, pIWzResMan_Instance, RC_AUTO_REPARSE | RC_AUTO_SERIALIZE, -1, -1);
-
-		//// NameSpace
-		//_PcCreateObject_IWzNameSpace(L"NameSpace", g_root, pUnkOuter);
-
-		//void* pIWzNameSpace_Instance = g_root;
-		//auto PcSetRootNameSpace = *(void(__cdecl*)(void*, int)) * (int*)pNameSpace; // Hard Coded
-		//PcSetRootNameSpace(pIWzNameSpace_Instance, 1);
-
-		//// Game FileSystem
-		//_PcCreateObject_IWzFileSystem(L"NameSpace#FileSystem", &pFileSystem, pUnkOuter);
-
-		//char sStartPath[MAX_PATH];
-		//GetModuleFileNameA(NULL, sStartPath, MAX_PATH);
-		//_CWvsApp__Dir_BackSlashToSlash(sStartPath);
-		//_CWvsApp__Dir_upDir(sStartPath);
-
-		//_bstr_ctor(&sPath, pData, sStartPath);
-
-		//auto iGameFS = _IWzFileSystem__Init(pFileSystem, pData, sPath);
-
-		//_bstr_ctor(&sPath, pData, "/");
-
-		//auto mGameFS = _IWzNameSpace__Mount(*g_root, pData, sPath, pFileSystem, (int)nPriority);
-
-		//// Data FileSystem
-		//_PcCreateObject_IWzFileSystem(L"NameSpace#FileSystem", &pFileSystem, pUnkOuter);
-
-		//_bstr_ctor(&sPath, pData, "./Data");
-
-		//auto iDataFS = _IWzFileSystem__Init(pFileSystem, pData, sPath);
-
-		//_bstr_ctor(&sPath, pData, "/");
-
-		//auto mDataFS = _IWzNameSpace__Mount(*g_root, pData, sPath, pFileSystem, (int)nPriority);
 	};
 	return Memory::SetHook(bEnable, reinterpret_cast<void**>(&_CWvsApp__InitializeResMan), _CWvsApp__InitializeResMan_Hook);
 }
@@ -308,7 +245,7 @@ KeyValuePair newKeyValuePairs[] = {
     {154, "[%s]在楓之谷商城中"},
     {155, "[%s]的現在位置是[%s]"},
     {156, "[%s]在特別活動地區裡"},
-    {157, "[%s]現在拒絕密語的狀態。"},
+    {157, "[%s]目前為拒絕密語狀態。"},
     {158, "你未加入組隊或沒有在線的隊員。"},
     {159, "你還未結婚或配偶沒有在線。"},
     {160, "沒有可對話的好友。"},
@@ -376,7 +313,7 @@ KeyValuePair newKeyValuePairs[] = {
     {305, "[%s]降低了[%s]的名聲。"},
     {306, "未知原因操作名聲失敗。"},
     {307, "請你稍後再試。"},
-    {308, "[%s]目前為拒絕組隊狀態。"},
+    {308, "[%s]目前為拒絕加入組隊狀態。"},
     {309, "[%s]拒絕了組隊邀請。"},
     {310, "開新組隊。"},
     {311, "從隊伍被踼出了。"},
@@ -402,7 +339,7 @@ KeyValuePair newKeyValuePairs[] = {
     {331, "組員："},
     {332, "你是隊長。"},
     {333, "超過限制時間拒絕了組隊的邀請。"},
-    {334, "[%s]拒絕加入公會狀態"},
+    {334, "[%s]目前為拒絕加入公會狀態。"},
     {335, "[%s]拒絕了公會邀請"},
     {336, "加入了[%s]公會"},
     {337, "您已被驅逐出公會"},
@@ -472,7 +409,7 @@ KeyValuePair newKeyValuePairs[] = {
     {402, "在同一個地圖裡\r\n才可以交易。"},
     {403, "[%s]正在做別的事。"},
     {404, "[%s]拒絕了你的邀請。"},
-    {405, "[%s]是拒絕邀請的狀態。"},
+    {405, "[%s]目前為拒絕邀請狀態。"},
     {406, "對方中止交易。"},
     {407, "交易成功了。\r\n請再確認交易的結果。"},
     {408, "扣除手續費後，獲得了%d楓幣。\r\n請確認。"},
@@ -826,7 +763,7 @@ KeyValuePair newKeyValuePairs[] = {
     {775, "管理帳號不能丟掉楓幣。"},
     {776, "- 向[%s]傳遞了邀請。"},
     {777, "- 找不到[%s]。"},
-    {778, "[%s]現在是拒絕聊天狀態。"},
+    {778, "[%s]目前為拒絕聊天狀態。"},
     {779, "[%s]拒絕了邀請。"},
     {780, "- 向[%s]發出聊天邀請。"},
     {781, "[%s]邀請你\r\n聊天。是否同意？"},
