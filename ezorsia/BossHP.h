@@ -24,5 +24,4 @@ private:
 	static void DisposeBossHpNumber();
 	//
 	static int GetMiniMapWidth();
-
 };

@@ -62,8 +62,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Client::UpdateResolution();
 		Client::FixMouseWheel();
 		Client::Chinese();
-		Client::FixDateFormat();
-		Client::FixItemType();
 		Client::JumpCap();
 		Client::MoreHook();
 		BossHP::Hook();

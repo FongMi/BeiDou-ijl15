@@ -6,8 +6,6 @@ public:
 	static void UpdateResolution();
 	static void FixMouseWheel();
 	static void Chinese();
-	static void FixDateFormat();
-	static void FixItemType();
 	static void JumpCap();
 	static void MoreHook();
 	static const int m_nIGCipherHash = 0XC65053F2;
