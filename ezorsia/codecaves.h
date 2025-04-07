@@ -173,3 +173,45 @@ __declspec(naked) void calcSpeedHook()
 		jmp calcSpeedHookRtn
 	}
 }
+
+int charLen = 55;
+void calcCharLen(const char* word)
+{
+	const std::string str = std::string(word);
+	auto firstByte = static_cast<unsigned char>(str[0]);
+
+	if (str.length() < 55)
+	{
+		charLen = 55;
+		return;
+	}
+	for (int i = 0; i < 60; i++)
+	{
+		firstByte = static_cast<unsigned char>(str[i]);
+		if (firstByte >= 0x81 && firstByte <= 0xFE)
+		{
+			i++;
+			continue;
+		}
+		if (i >= 55)
+		{
+			charLen = i;
+			break;
+		}
+	}
+}
+
+constexpr DWORD skillToolTipNewRtn = 0x008F3844;
+__declspec(naked) void skillToolTip()
+{
+	__asm {
+		mov eax, [ebp + 0Ch]
+		push eax
+		call calcCharLen
+		pop eax
+		mov eax, charLen
+		mov[ebp - 1Ch], eax
+		lea eax, [ebp - 30h]
+		jmp skillToolTipNewRtn
+	}
+}

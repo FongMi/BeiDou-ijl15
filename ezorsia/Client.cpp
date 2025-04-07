@@ -131,6 +131,9 @@ void Client::Chinese() {
 
 		// Fix Item Line Break
 		Memory::PatchNop(0x008E4252, 2);
+
+		// Fix Skill Line Break
+		Memory::CodeCave(skillToolTip, 0x008F383E, 6);
 	}
 }
 
