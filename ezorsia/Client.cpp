@@ -171,4 +171,14 @@ void Client::MoreHook() {
 	// Make NX items droppable
 	Memory::FillBytes(0x004F350C, 0x90, 6);
 	Memory::FillBytes(0x004F351E, 0x90, 6);
+
+	// Fix chat msg postion
+	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
+
+	// Monster Book Aligned Text
+	Memory::WriteByte(0x0086425B + 1, 82);
+	Memory::CodeCave(mbpos1, 0x00864378, 5);
+	Memory::CodeCave(mbpos2, 0x00864495, 5);
+	Memory::CodeCave(mbpos3, 0x008645B4, 5);
+	Memory::WriteInt(0x008646B8 + 1, 221);
 }

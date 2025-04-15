@@ -215,3 +215,57 @@ __declspec(naked) void skillToolTip()
 		jmp skillToolTipNewRtn
 	}
 }
+
+const DWORD chatTextPosRtn = 0x008DD075;
+__declspec(naked) void chatTextPos()
+{
+	__asm {
+		add eax, [edi + 0CFCh]
+		cmp[edi + 0D00h], 3
+		jz label_type3
+		cmp[edi + 0D00h], 2
+		jz label_type2
+		label_type1 :
+		sub eax, 1
+			jmp label_rtn
+			label_type2 :
+		jmp label_rtn
+			label_type3 :
+		sub eax, 2
+			label_rtn :
+			jmp chatTextPosRtn
+	}
+}
+
+const DWORD mbpos1Rtn = 0x0086437D;
+__declspec(naked) void mbpos1()
+{
+	__asm {
+		push 133
+		sub eax, edi
+		push eax
+		jmp mbpos1Rtn
+	}
+}
+
+const DWORD mbpos2Rtn = 0x0086449A;
+__declspec(naked) void mbpos2()
+{
+	__asm {
+		push 165
+		sub eax, edi
+		push eax
+		jmp mbpos2Rtn
+	}
+}
+
+const DWORD mbpos3Rtn = 0x008645B9;
+__declspec(naked) void mbpos3()
+{
+	__asm {
+		push 186
+		sub eax, edi
+		push eax
+		jmp mbpos3Rtn
+	}
+}
