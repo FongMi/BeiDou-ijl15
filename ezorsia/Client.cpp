@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "AddyLocations.h"
 #include "codecaves.h"
 #include "FixBuddy.h"

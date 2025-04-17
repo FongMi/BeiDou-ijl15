@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "AutoTypes.h"
 
 //notes from my knowledge as i have not used these kinds of codes practically well

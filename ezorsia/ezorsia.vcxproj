@@ -139,7 +139,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	  <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -176,7 +176,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="FixBuddy.h" />
     <ClInclude Include="ijl15.h" />
-	<ClInclude Include="ConvertUTF8.h" />
+    <ClInclude Include="ConvertUTF8.h" />
     <ClInclude Include="MapleClientCollectionTypes\TSecType.h" />
     <ClInclude Include="MapleClientCollectionTypes\ZAllocAnonSelector.h" />
     <ClInclude Include="MapleClientCollectionTypes\ZAllocBase.h" />
@@ -213,7 +213,7 @@
     <ClCompile Include="BossHP.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="ijl15.cpp" />
-	<ClCompile Include="ConvertUTF8.cpp" />
+    <ClCompile Include="ConvertUTF8.cpp" />
     <ClCompile Include="ZAllocEx.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Memory.cpp" />
