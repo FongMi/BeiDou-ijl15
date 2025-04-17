@@ -15,6 +15,7 @@ public:
 	static void CodeCave(void* ptrCodeCave, DWORD dwOriginAddress, int nNOPCount);
 	static void WriteByteArray(DWORD dwOriginAddress, unsigned char* ucValue, const int ucValueSize);
 	static void PatchNop(const DWORD dwOriginAddress, const int nCount);
+	static DWORD GetFunctionAddress(LPCSTR lpModule, LPCSTR lpFunc);
 	static bool UseVirtuProtect;
 };
 

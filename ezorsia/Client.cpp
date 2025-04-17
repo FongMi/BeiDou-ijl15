@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "AddyLocations.h"
 #include "codecaves.h"
-#include "FixIme.h"
 #include "FixBuddy.h"
+#include "ConvertUTF8.h"
 
 int Client::m_nGameWidth = 800;
 int Client::m_nGameHeight = 600;
@@ -18,7 +18,6 @@ bool Client::SwitchChinese = true;
 int Client::speedMovementCap = 140;
 bool Client::climbSpeedAuto = false;
 float Client::climbSpeed = 1.0;
-unsigned char Client::imeType = 1;
 std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
 int Client::serverIP_Port = 8484;
 
@@ -103,16 +102,10 @@ void Client::FixMouseWheel() {
 }
 
 void Client::Chinese() {
-	if (Client::imeType == 0)
-	{
-		FixIme::HookOld();
-	}
-	else {
-		FixIme::HookNew();
-	}
 	FixBuddy::Hook();
+	ConvertUTF8::Hook();
 	if (SwitchChinese) {
-		Memory::WriteString(0x00AF2B28, "πÔ¡p∑˘     ");
+		Memory::WriteString(0x00AF2B28, "Â∞çËÅØÁõü     ");
 		Memory::WriteByte(0x008E55ED + 1, 0x0B);
 		Memory::WriteByte(0x008E557A + 1, 0x0B);
 		Memory::WriteByte(0x008E565E + 1, 0x0B);
@@ -120,10 +113,10 @@ void Client::Chinese() {
 		Memory::WriteByte(0x00901400 + 1, 1);
 
 		// Fix Date Format
-		Memory::CodeCave(fixDateFormat, 0x008EBF57, 14); // StringPool 5273
-		Memory::CodeCave(fixDateFormat2, 0x008EBFA1, 14); // StringPool 655
-		Memory::CodeCave(fixDateFormat3, 0x008EC31A, 14); // StringPool 679
-		Memory::CodeCave(fixDateFormat4, 0x008EBF05, 14); // StringPool 3138
+		Memory::CodeCave(fixDateFormat, 0x008EBF57, 14);
+		Memory::CodeCave(fixDateFormat2, 0x008EBFA1, 14);
+		Memory::CodeCave(fixDateFormat3, 0x008EC31A, 14);
+		Memory::CodeCave(fixDateFormat4, 0x008EBF05, 14);
 
 		// Fix Item Type
 		Memory::CodeCave(getItemType1, 0x005CFA99, 15);
@@ -175,7 +168,7 @@ void Client::MoreHook() {
 	// Fix chat msg postion
 	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
 
-	// Monster Book Aligned Text
+	// Fix Monster Book Aligned Text
 	Memory::WriteByte(0x0086425B + 1, 82);
 	Memory::CodeCave(mbpos1, 0x00864378, 5);
 	Memory::CodeCave(mbpos2, 0x00864495, 5);

@@ -141,10 +141,10 @@
     <ClInclude Include="BossHP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FixIme.h">
+    <ClInclude Include="FixBuddy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FixBuddy.h">
+    <ClInclude Include="ConvertUTF8.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -172,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="BossHP.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConvertUTF8.cpp">
+        <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
