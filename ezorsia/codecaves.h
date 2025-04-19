@@ -181,7 +181,7 @@ void calcCharLen(const char* word) {
 	while (pos < len && width < 55) {
 		unsigned char c = str[pos];
 		int bytes = 1, w = 1;
-		if ((c & 0xE0) == 0xC0)      bytes = 2, w = 2;
+		if ((c & 0xE0) == 0xC0) bytes = 2, w = 2;
 		else if ((c & 0xF0) == 0xE0) bytes = 3, w = 2;
 		else if ((c & 0xF8) == 0xF0) bytes = 4, w = 2;
 		if (width + w > 55) break;
