@@ -38,7 +38,7 @@ void Client::UpdateGameStartup() {
 	Memory::WriteInt(0x007519C1 + 1, serverIP_Port);
 
 	//optional non-resolution related stuff
-	if (useTubi) { Memory::FillBytes(0x00485C32, 0x90, 2); }
+	if (useTubi) { Memory::PatchNop(0x00485C32, 2); }
 
 	Memory::WriteInt(0x0077E055 + 1, 2147483646);
 	Memory::WriteInt(0x0077E12F + 1, 2147483646);
@@ -68,7 +68,7 @@ void Client::UpdateResolution() {
 	}
 
 	if (RemoveLogos) {
-		Memory::FillBytes(0x0062EE54, 0x90, 21);	//no Logo @launch //Thanks Denki!!
+		Memory::PatchNop(0x0062EE54, 21);	//no Logo @launch //Thanks Denki!!
 	}
 
 	Memory::WriteInt(0x00522C73 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
@@ -155,15 +155,15 @@ void Client::MoreHook() {
 	Memory::PatchNop(0x096BF1B, 2);
 
 	// Teleport on air
-	Memory::FillBytes(0x00957C2D, 0x90, 6);
+	Memory::PatchNop(0x00957C2D, 6);
 
 	// Lacking Level Check Removal
 	Memory::WriteByte(0x008AD01A, 0xE9);
 	Memory::WriteInt(0x008AD01A + 1, 0x008AD227 - (0x008AD01A + 5));
 
 	// Make NX items droppable
-	Memory::FillBytes(0x004F350C, 0x90, 6);
-	Memory::FillBytes(0x004F351E, 0x90, 6);
+	Memory::PatchNop(0x004F350C, 6);
+	Memory::PatchNop(0x004F351E, 6);
 
 	// Fix chat msg postion
 	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
