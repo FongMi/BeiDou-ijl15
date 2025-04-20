@@ -127,13 +127,9 @@ bool ConvertUTF8::Hook_CharNextA()
 bool ConvertUTF8::Hook()
 {
 	//修正 IME 輸入後無法送出
-	Memory::PatchNop(0x008D54A6, 9); // Key ?
+	Memory::PatchNop(0x008D54A6, 9); // Key
 	Memory::PatchNop(0x00937225, 9); // Chat
 	Memory::PatchNop(0x00531EE8, 9); // Group Message
-
-	// 剪貼板支援中文
-	Memory::PatchNop(0x004CAE7D, 2);
-	Memory::WriteByte(0x004CAE8F, 0xEB);
 
 	bool bResult = true;
 	bResult &= ConvertUTF8::Hook_WideCharToMultiByte();
