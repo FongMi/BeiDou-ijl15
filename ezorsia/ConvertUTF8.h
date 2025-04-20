@@ -17,4 +17,6 @@ private:
 	static bool Hook_TextOutA();
 	static bool Hook_CharPrevA();
 	static bool Hook_CharNextA();
+	static bool Hook_GetClipboardData();
+	static bool Hook_SetClipboardData();
 };
