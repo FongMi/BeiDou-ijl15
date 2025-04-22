@@ -174,24 +174,29 @@ __declspec(naked) void calcSpeedHook()
 	}
 }
 
-int charLen = 55;
-void calcCharLen(const char* word) {
-	const std::string str(word);
-	int width = 0, pos = 0, len = str.size();
-	while (pos < len && width < 55) {
-		unsigned char c = str[pos];
-		int bytes = 1, w = 1;
-		if ((c & 0xE0) == 0xC0) bytes = 2, w = 2;
-		else if ((c & 0xF0) == 0xE0) bytes = 3, w = 2;
-		else if ((c & 0xF8) == 0xF0) bytes = 4, w = 2;
-		if (width + w > 55) break;
-		width += w;
-		pos += bytes;
+int charLen = 0;
+void calcCharLen(const char* word)
+{
+	const std::string str = std::string(word);
+	auto firstByte = static_cast<unsigned char>(str[0]);
+	if (str.length() < 55) {
+		charLen = 55;
+		return;
 	}
-	charLen = pos;
+	for (int i = 0; i < 60; i++) {
+		firstByte = static_cast<unsigned char>(str[i]);
+		if (firstByte >= 0x81 && firstByte <= 0xFE) {
+			i++;
+			continue;
+		}
+		if (i >= 55) {
+			charLen = i;
+			break;
+		}
+	}
 }
 
-constexpr DWORD skillToolTipNewRtn = 0x008F3844;
+constexpr DWORD skillToolTipRtn = 0x008F3844;
 __declspec(naked) void skillToolTip()
 {
 	__asm {
@@ -202,7 +207,7 @@ __declspec(naked) void skillToolTip()
 		mov eax, charLen
 		mov[ebp - 1Ch], eax
 		lea eax, [ebp - 30h]
-		jmp skillToolTipNewRtn
+		jmp skillToolTipRtn
 	}
 }
 

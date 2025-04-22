@@ -32,8 +32,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 			Client::setAccCap = reader.GetInteger("optional", "setAccCap", 999);
 			Client::setAvdCap = reader.GetInteger("optional", "setAvdCap", 999);
 			Client::setAtkOutCap = reader.GetInteger("optional", "setAtkOutCap", 199999);
-			Client::useTubi = reader.GetBoolean("optional", "useTubi", false);
-			Client::SwitchChinese = reader.GetBoolean("general", "SwitchChinese", false);
 			Client::speedMovementCap = reader.GetInteger("optional", "speedMovementCap", 140);
 			Client::jumpCap = reader.GetInteger("optional", "jumpCap", 123);
 			Client::ServerIP_AddressFromINI = reader.Get("general", "ServerIP_Address", "127.0.0.1");

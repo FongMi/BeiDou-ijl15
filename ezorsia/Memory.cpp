@@ -132,20 +132,3 @@ void Memory::CodeCave(void* ptrCodeCave, const DWORD dwOriginAddress, const int 
 void Memory::PatchNop(const DWORD dwOriginAddress, const int nCount) {
     FillBytes(dwOriginAddress, 0x90, nCount);
 }
-
-DWORD Memory::GetFunctionAddress(LPCSTR lpModule, LPCSTR lpFunc) {
-    HMODULE library = LoadLibraryA(lpModule);
-
-    if (!library) {
-        return 0; //cannot load library
-    }
-
-    DWORD functionAddress = (DWORD)GetProcAddress(library, lpFunc);
-
-    if (!functionAddress) {
-        return 0; //not found function address!
-    }
-
-    return functionAddress;
-
-}

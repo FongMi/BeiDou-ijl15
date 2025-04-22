@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "AddyLocations.h"
 #include "codecaves.h"
+#include "FixIme.h"
 #include "FixBuddy.h"
-#include "ConvertUTF8.h"
 #include "ReplacementString.h"
 
 int Client::m_nGameWidth = 800;
@@ -14,8 +14,6 @@ int Client::setMAtkCap = 1999;
 int Client::setAccCap = 999;
 int Client::setAvdCap = 999;
 double Client::setAtkOutCap = 199999;
-bool Client::useTubi = true;
-bool Client::SwitchChinese = true;
 int Client::speedMovementCap = 140;
 bool Client::climbSpeedAuto = false;
 float Client::climbSpeed = 1.0;
@@ -39,7 +37,7 @@ void Client::UpdateGameStartup() {
 	Memory::WriteInt(0x007519C1 + 1, serverIP_Port);
 
 	//optional non-resolution related stuff
-	if (useTubi) { Memory::PatchNop(0x00485C32, 2); }
+	Memory::PatchNop(0x00485C32, 2);
 
 	Memory::WriteInt(0x0077E055 + 1, 2147483646);
 	Memory::WriteInt(0x0077E12F + 1, 2147483646);
@@ -103,32 +101,32 @@ void Client::FixMouseWheel() {
 }
 
 void Client::Chinese() {
+	FixIme::Hook();
 	FixBuddy::Hook();
-	ConvertUTF8::Hook();
-	if (SwitchChinese) {
-		Memory::WriteString(0x00AF2B28, ALLIANCE);
-		Memory::WriteByte(0x008E55ED + 1, 0x0B);
-		Memory::WriteByte(0x008E557A + 1, 0x0B);
-		Memory::WriteByte(0x008E565E + 1, 0x0B);
-		Memory::WriteByte(0x0090142E + 1, 0x5E);
-		Memory::WriteByte(0x00901400 + 1, 1);
 
-		// Fix Date Format
-		Memory::CodeCave(fixDateFormat, 0x008EBF57, 14);
-		Memory::CodeCave(fixDateFormat2, 0x008EBFA1, 14);
-		Memory::CodeCave(fixDateFormat3, 0x008EC31A, 14);
-		Memory::CodeCave(fixDateFormat4, 0x008EBF05, 14);
+	Memory::WriteString(0x00AF2B28, ALLIANCE);
+	Memory::WriteByte(0x008E55ED + 1, 0x0B);
+	Memory::WriteByte(0x008E557A + 1, 0x0B);
+	Memory::WriteByte(0x008E565E + 1, 0x0B);
+	Memory::WriteByte(0x0090142E + 1, 0x5E);
+	Memory::WriteByte(0x00901400 + 1, 1);
 
-		// Fix Item Type
-		Memory::CodeCave(getItemType1, 0x005CFA99, 15);
-		Memory::CodeCave(getItemType2, getItemType2Addr, 27);
+	// Fix Date Format
+	Memory::CodeCave(fixDateFormat, 0x008EBF57, 14);
+	Memory::CodeCave(fixDateFormat2, 0x008EBFA1, 14);
+	Memory::CodeCave(fixDateFormat3, 0x008EC31A, 14);
+	Memory::CodeCave(fixDateFormat4, 0x008EBF05, 14);
 
-		// Fix Item Line Break
-		Memory::PatchNop(0x008E4252, 2);
+	// Fix Item Type
+	Memory::CodeCave(getItemType1, 0x005CFA99, 15);
+	Memory::CodeCave(getItemType2, getItemType2Addr, 27);
 
-		// Fix Skill Line Break
-		Memory::CodeCave(skillToolTip, 0x008F383E, 6);
-	}
+	// Fix Item Line Break
+	Memory::PatchNop(0x008E4252, 2);
+
+	// Fix Skill Line Break
+	Memory::CodeCave(skillToolTip, 0x008F383E, 6);
+	
 }
 
 DWORD Client::jumpCap = 123;

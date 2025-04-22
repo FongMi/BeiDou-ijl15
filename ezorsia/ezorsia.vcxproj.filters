@@ -144,10 +144,10 @@
     <ClInclude Include="FixBuddy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConvertUTF8.h">
+    <ClInclude Include="ReplacementString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ReplacementString.h">
+    <ClInclude Include="FixIme.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -174,9 +174,6 @@
       <Filter>Source Files\innerH</Filter>
     </ClCompile>
     <ClCompile Include="BossHP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ConvertUTF8.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ReplacementString.cpp">

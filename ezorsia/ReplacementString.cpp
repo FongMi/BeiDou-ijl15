@@ -1,6 +1,6 @@
+#include "stdafx.h"
 #include "ReplacementString.h"
 
-const int keyValuePairsCount = sizeof(keyValuePairs) / sizeof(KeyValuePair);
 const char* const ALLIANCE = "¹ïÁp·ù     ";
 
 KeyValuePair keyValuePairs[] = {
@@ -1884,3 +1884,5 @@ KeyValuePair keyValuePairs[] = {
     {5617, "©M \r"},
     {5639, " ·¬¹ô"},
 };
+
+const int keyValuePairsCount = sizeof(keyValuePairs) / sizeof(KeyValuePair);

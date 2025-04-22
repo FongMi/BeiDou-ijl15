@@ -18,8 +18,6 @@ public:
 	static int setAccCap;
 	static int setAvdCap;
 	static double setAtkOutCap;
-	static bool useTubi;
-	static bool SwitchChinese;
 	static bool climbSpeedAuto;
 	static float climbSpeed;
 	static int speedMovementCap;
