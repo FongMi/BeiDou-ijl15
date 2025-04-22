@@ -55,7 +55,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		HookIWzNameSpace__Mount(true);
 		HookCWvsApp__InitializeResMan(false); //experimental //ty to all the contributors of the ragezone release: Client load .img instead of .wz v62~v92
 		Hook_StringPool__GetString(true); //hook stringpool modification //ty !! popcorn //ty darter
-		Hook_lpfn_NextLevel(true);
 
 		Client::UpdateGameStartup();
 		Client::UpdateResolution();
