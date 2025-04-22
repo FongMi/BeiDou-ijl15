@@ -1,8 +1,9 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #include "AddyLocations.h"
 #include "codecaves.h"
 #include "FixBuddy.h"
 #include "ConvertUTF8.h"
+#include "ReplacementString.h"
 
 int Client::m_nGameWidth = 800;
 int Client::m_nGameHeight = 600;
@@ -105,7 +106,7 @@ void Client::Chinese() {
 	FixBuddy::Hook();
 	ConvertUTF8::Hook();
 	if (SwitchChinese) {
-		Memory::WriteString(0x00AF2B28, "對聯盟     ");
+		Memory::WriteString(0x00AF2B28, ALLIANCE);
 		Memory::WriteByte(0x008E55ED + 1, 0x0B);
 		Memory::WriteByte(0x008E557A + 1, 0x0B);
 		Memory::WriteByte(0x008E565E + 1, 0x0B);

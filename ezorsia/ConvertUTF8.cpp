@@ -1,4 +1,4 @@
-﻿#include <memory>
+#include <memory>
 #include "stdafx.h"
 #include "ConvertUTF8.h"
 

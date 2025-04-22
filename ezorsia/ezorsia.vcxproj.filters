@@ -147,6 +147,9 @@
     <ClInclude Include="ConvertUTF8.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ReplacementString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -174,7 +177,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConvertUTF8.cpp">
-        <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplacementString.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
