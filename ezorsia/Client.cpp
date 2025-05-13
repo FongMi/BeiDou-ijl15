@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "AddyLocations.h"
 #include "codecaves.h"
 #include "FixIme.h"
 #include "FixBuddy.h"
+#include "AddyLocations.h"
 #include "ReplacementString.h"
 
 int Client::m_nGameWidth = 800;
@@ -35,9 +35,6 @@ void Client::UpdateGameStartup() {
 	Memory::WriteString(0x00AFE084 + 16, serverIP_Address);//write the user-set IP address
 	Memory::WriteString(0x00AFE084 + 32, serverIP_Address);//write the user-set IP address
 	Memory::WriteInt(0x007519C1 + 1, serverIP_Port);
-
-	//optional non-resolution related stuff
-	Memory::PatchNop(0x00485C32, 2);
 
 	Memory::WriteInt(0x0077E055 + 1, 2147483646);
 	Memory::WriteInt(0x0077E12F + 1, 2147483646);
@@ -126,7 +123,6 @@ void Client::Chinese() {
 
 	// Fix Skill Line Break
 	Memory::CodeCave(skillToolTip, 0x008F383E, 6);
-	
 }
 
 DWORD Client::jumpCap = 123;
@@ -145,6 +141,11 @@ void Client::JumpCap() {
 }
 
 void Client::MoreHook() {
+	//Super Tubi
+	Memory::PatchNop(0x00485C01, 2);
+	Memory::PatchNop(0x00485C21, 2);
+	Memory::PatchNop(0x00485C32, 2);
+
 	// Trump
 	Memory::WriteInt(0x0045A5BE + 1, 9999);
 
