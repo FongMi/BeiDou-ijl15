@@ -17,8 +17,8 @@ double Client::setAtkOutCap = 199999;
 int Client::speedMovementCap = 140;
 bool Client::climbSpeedAuto = false;
 float Client::climbSpeed = 1.0;
-std::string Client::ServerIP_AddressFromINI = "127.0.0.1";
-int Client::serverIP_Port = 8484;
+std::string Client::ServerIP = "127.0.0.1";
+int Client::ServerPort = 8484;
 
 void Client::UpdateGameStartup() {
 	Memory::FillBytes(0x00C08459, 0x20, 0x00C0846E - 0x00C08459);//remove elevation requests
@@ -30,11 +30,11 @@ void Client::UpdateGameStartup() {
 	Memory::WriteByte(0x0049D398 + 1, 0x01);//remove elevation requests	//still not working unfortunately
 
 	Memory::FillBytes(0x00AFE084, 0x00, 0x006FE0B2 - 0x006FE084);//remove the existing server IP address in client
-	const char* serverIP_Address = Client::ServerIP_AddressFromINI.c_str();
+	const char* serverIP_Address = Client::ServerIP.c_str();
 	Memory::WriteString(0x00AFE084, serverIP_Address);//write the user-set IP address
 	Memory::WriteString(0x00AFE084 + 16, serverIP_Address);//write the user-set IP address
 	Memory::WriteString(0x00AFE084 + 32, serverIP_Address);//write the user-set IP address
-	Memory::WriteInt(0x007519C1 + 1, serverIP_Port);
+	Memory::WriteInt(0x007519C1 + 1, ServerPort);
 
 	Memory::WriteInt(0x0077E055 + 1, 2147483646);
 	Memory::WriteInt(0x0077E12F + 1, 2147483646);

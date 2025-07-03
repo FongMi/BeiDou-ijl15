@@ -130,5 +130,14 @@ void Memory::CodeCave(void* ptrCodeCave, const DWORD dwOriginAddress, const int 
 }
 
 void Memory::PatchNop(const DWORD dwOriginAddress, const int nCount) {
-    FillBytes(dwOriginAddress, 0x90, nCount);
+	if (nCount <= 0) return;
+	DWORD oldProtect;
+	if (UseVirtuProtect) {
+		VirtualProtect((LPVOID)dwOriginAddress, nCount, PAGE_EXECUTE_READWRITE, &oldProtect);
+	}
+	memset((void*)dwOriginAddress, 0x90, nCount);
+	if (UseVirtuProtect) {
+		DWORD temp;
+		VirtualProtect((LPVOID)dwOriginAddress, nCount, oldProtect, &temp);
+	}
 }

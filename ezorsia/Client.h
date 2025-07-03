@@ -22,6 +22,6 @@ public:
 	static float climbSpeed;
 	static int speedMovementCap;
 	static DWORD jumpCap;
-	static std::string ServerIP_AddressFromINI;
-	static int serverIP_Port;
+	static std::string ServerIP;
+	static int ServerPort;
 };
