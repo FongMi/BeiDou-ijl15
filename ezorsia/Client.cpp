@@ -168,10 +168,16 @@ void Client::MoreHook() {
 	// Fix chat msg postion
 	Memory::CodeCave(chatTextPos, 0x008DD06F, 6);
 
+	// Fix guild emblem pixels
+	Memory::WriteByte(0x005F12EF + 2, 0x05);
+
 	// Fix Monster Book Aligned Text
 	Memory::WriteByte(0x0086425B + 1, 82);
 	Memory::CodeCave(mbpos1, 0x00864378, 5);
 	Memory::CodeCave(mbpos2, 0x00864495, 5);
 	Memory::CodeCave(mbpos3, 0x008645B4, 5);
 	Memory::WriteInt(0x008646B8 + 1, 221);
+
+	// Assaulter without target
+	Memory::WriteByte(0x00951347 + 1, 0x1C);
 }
