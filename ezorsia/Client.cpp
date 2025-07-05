@@ -149,15 +149,10 @@ void Client::MoreHook() {
 	// Trump
 	Memory::WriteInt(0x0045A5BE + 1, 9999);
 
-	// Unlimited Flash Jump
-	Memory::PatchNop(0x095071D, 2);
-	Memory::PatchNop(0x096BF91, 6);
-	Memory::PatchNop(0x096BF1B, 2);
-
 	// Teleport on air
 	Memory::PatchNop(0x00957C2D, 6);
 
-	// Lacking Level Check Removal
+	// Lacking level check removal
 	Memory::WriteByte(0x008AD01A, 0xE9);
 	Memory::WriteInt(0x008AD01A + 1, 0x008AD227 - (0x008AD01A + 5));
 
@@ -171,7 +166,7 @@ void Client::MoreHook() {
 	// Fix guild emblem pixels
 	Memory::WriteByte(0x005F12EF + 2, 0x05);
 
-	// Fix Monster Book Aligned Text
+	// Fix monster book aligned text
 	Memory::WriteByte(0x0086425B + 1, 82);
 	Memory::CodeCave(mbpos1, 0x00864378, 5);
 	Memory::CodeCave(mbpos2, 0x00864495, 5);
@@ -180,4 +175,15 @@ void Client::MoreHook() {
 
 	// Assaulter without target
 	Memory::WriteByte(0x00951347 + 1, 0x1C);
+
+	// Unlimited flash jump
+	Memory::PatchNop(0x095071D, 2);
+	Memory::PatchNop(0x096BF91, 6);
+	Memory::PatchNop(0x096BF1B, 2);
+
+	// Unlimited flash jump for all job
+	Memory::PatchNop(0x0096C073, 6);
+	Memory::SetHook(true, reinterpret_cast<void**>(&pDoActiveSkill), CUserLocal__DoActiveSkill_t);
+	Memory::SetHook(true, reinterpret_cast<void**>(&pDoJump), CUserLocal_Jump);
+	Memory::CodeCave((void*)FlashJumpAll, 0x0096BF0B, 0);
 }

@@ -263,3 +263,70 @@ __declspec(naked) void mbpos3()
 		jmp mbpos3Rtn
 	}
 }
+
+#include <chrono>
+using namespace std;
+using chrono::duration_cast;
+using chrono::milliseconds;
+using chrono::system_clock;
+chrono::time_point<chrono::steady_clock> jumptimer;
+bool jumped = false;
+int doActiveJmpBack = 0x0096793B;
+int doBoundJump = 0x0096897A;
+
+void _declspec(naked)doActiveSkills() {
+	_asm {
+		mov eax, 4111006
+		cmp esi, eax
+		je[jumpmove]
+		mov eax, 2301005 // need this to go back to our original skills from where we codecave
+		jmp[doActiveJmpBack]
+		jumpmove : jmp[doBoundJump]
+	}
+}
+
+bool isSkillIDMatched(int nSkillID)
+{
+	const int skillIDs[] = {
+		4111006 // put all new skills here
+	};
+	return std::find(std::begin(skillIDs), std::end(skillIDs), nSkillID) != std::end(skillIDs);
+}
+
+auto pDoActiveSkill = (int(__thiscall*)(int, int, int, int))0x00966F7A;
+
+int(__fastcall CUserLocal__DoActiveSkill_t)(int _This, void* edx, int nSkillID, unsigned int nScanCode, int pnConsumeCheck)
+{
+	if (isSkillIDMatched(nSkillID))
+	{
+		Memory::CodeCave((void*)doActiveSkills, 0x0096792A, 0);
+	}
+	else
+	{
+		Memory::WriteByte(0x0096792A, 0x0F);
+		Memory::WriteByte(0x0096792A + 1, 0x8F);
+		Memory::WriteByte(0x0096792A + 2, 0x71);
+		Memory::WriteByte(0x0096792A + 3, 0x09);
+		Memory::WriteByte(0x0096792A + 4, 0x00);
+	}
+	return pDoActiveSkill(_This, nSkillID, nScanCode, pnConsumeCheck);
+}
+
+auto pDoJump = (int(__thiscall*)(int, int))0x0094C383;
+int(__fastcall CUserLocal_Jump)(int _this, void* edx, int a2) {
+	CUserLocal__DoActiveSkill_t(_this, nullptr, 4111006, 0, 0);
+	return pDoJump(_this, a2);
+}
+
+const DWORD FlashJumpVar = 0x0096BF52;
+const DWORD FlashJumpRet = 0x0096BF12;
+void __declspec(naked)FlashJumpAll() {
+	_asm {
+		cmp     eax, 0xD72A0C
+		je[fjvar]
+		cmp     eax, 4111006
+		je[fjvar]
+		jmp FlashJumpRet
+		fjvar : jmp[FlashJumpVar]
+	}
+}
