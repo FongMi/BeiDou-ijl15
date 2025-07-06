@@ -73,7 +73,8 @@ private:
 		Memory::FillBytes(0x008D54A6, 0x90, 9); // Key
 		Memory::FillBytes(0x00937225, 0x90, 9); // Chat
 		Memory::FillBytes(0x00531EE8, 0x90, 9); // Group Message
-		Memory::FillBytes(0x004CAE7D, 0x90, 2);
+		Memory::FillBytes(0x004CAE7D, 0x90, 2); // Clipboard
 		Memory::WriteByte(0x004CAE8F, 0xEB);
+		Memory::FillBytes(0x007A015D, 0x90, 2); // Chinese name
 	}
 };
