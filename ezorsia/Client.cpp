@@ -5,8 +5,6 @@
 #include "AddyLocations.h"
 #include "ReplacementString.h"
 
-int Client::m_nGameWidth = 800;
-int Client::m_nGameHeight = 600;
 bool Client::WindowedMode = true;
 bool Client::RemoveLogos = true;
 int Client::setDamageCap = 199999;
@@ -67,19 +65,20 @@ void Client::UpdateResolution() {
 		Memory::PatchNop(0x0062EE54, 21);	//no Logo @launch //Thanks Denki!!
 	}
 
-	Memory::WriteInt(0x00522C73 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00522E65 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x0052307E + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523359 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523595 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up //quest complete y axis
-	Memory::WriteInt(0x0052378B + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x0052397D + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523BB1 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523DA5 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523FA3 + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x005243DB + 1, m_nGameHeight - 92); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x00523154 + 1, m_nGameHeight - 102); //various requests like party, guild, friend, family, invites that pop up
-	Memory::WriteInt(0x0052418C + 1, m_nGameHeight - 102); //party quest available pop-up y axis my first address find own my own
+	int height = 600;
+	Memory::WriteInt(0x00522C73 + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00522E65 + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x0052307E + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523359 + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523595 + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up //quest complete y axis
+	Memory::WriteInt(0x0052378B + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x0052397D + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523BB1 + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523DA5 + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523FA3 + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x005243DB + 1, height - 92); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x00523154 + 1, height - 102); //various requests like party, guild, friend, family, invites that pop up
+	Memory::WriteInt(0x0052418C + 1, height - 102); //party quest available pop-up y axis my first address find own my own
 
 	int reqPopOffset = 41;
 	Memory::WriteInt(0x00523092 + 1, 464 - reqPopOffset); //various requests like party, guild, friend, family, invites that pop up //trade

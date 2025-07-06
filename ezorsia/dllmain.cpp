@@ -22,8 +22,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 
 		INIReader reader("config.ini");
 		if (reader.ParseError() == 0) {
-			Client::m_nGameWidth = reader.GetInteger("general", "width", 800);
-			Client::m_nGameHeight = reader.GetInteger("general", "height", 600);
 			Client::WindowedMode = reader.GetBoolean("general", "WindowedMode", true);
 			Client::RemoveLogos = reader.GetBoolean("general", "RemoveLogos", true);
 			Memory::UseVirtuProtect = reader.GetBoolean("general", "UseVirtuProtect", true);
