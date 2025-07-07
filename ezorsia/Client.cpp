@@ -185,11 +185,4 @@ void Client::MoreHook() {
 	Memory::SetHook(true, reinterpret_cast<void**>(&pDoActiveSkill), CUserLocal__DoActiveSkill_t);
 	Memory::SetHook(true, reinterpret_cast<void**>(&pDoJump), CUserLocal_Jump);
 	Memory::CodeCave((void*)FlashJumpAll, 0x0096BF0B, 0);
-	
-	//Disable pic check
-	Memory::WriteByte(0x005F7CA1 + 1, 0x95);
-	Memory::WriteByte(0x005F7CD4, 0x75);
-	Memory::WriteByte(0x005F7CD4 + 1, 0x74);
-	Memory::PatchNop(0x005F7DCD, 26);
-	Memory::PatchNop(0x005F7E5F, 12);
 }
