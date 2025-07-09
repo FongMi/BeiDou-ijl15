@@ -148,9 +148,6 @@ void Client::MoreHook() {
 	// Trump
 	Memory::WriteInt(0x0045A5BE + 1, 9999);
 
-	// Teleport on air
-	Memory::PatchNop(0x00957C2D, 6);
-
 	// Lacking level check removal
 	Memory::WriteByte(0x008AD01A, 0xE9);
 	Memory::WriteInt(0x008AD01A + 1, 0x008AD227 - (0x008AD01A + 5));
@@ -172,19 +169,16 @@ void Client::MoreHook() {
 	Memory::CodeCave(mbpos3, 0x008645B4, 5);
 	Memory::WriteInt(0x008646B8 + 1, 221);
 
-	// Assaulter without target
-	Memory::WriteByte(0x00951347 + 1, 0x1C);
+	// Flash jump for all job
+	Memory::PatchNop(0x0096C073, 6);
+	Memory::SetHook(true, reinterpret_cast<void**>(&pDoActiveSkill), CUserLocal__DoActiveSkill_t);
+	Memory::SetHook(true, reinterpret_cast<void**>(&pDoJump), CUserLocal_Jump);
+	Memory::CodeCave((void*)FlashJumpAll, 0x0096BF0B, 0);
 
 	// Unlimited flash jump
 	Memory::PatchNop(0x095071D, 2);
 	Memory::PatchNop(0x096BF91, 6);
 	Memory::PatchNop(0x096BF1B, 2);
-
-	// Unlimited flash jump for all job
-	Memory::PatchNop(0x0096C073, 6);
-	Memory::SetHook(true, reinterpret_cast<void**>(&pDoActiveSkill), CUserLocal__DoActiveSkill_t);
-	Memory::SetHook(true, reinterpret_cast<void**>(&pDoJump), CUserLocal_Jump);
-	Memory::CodeCave((void*)FlashJumpAll, 0x0096BF0B, 0);
 
 	// Enable keyboard for PIC
 	Memory::PatchNop(0x004CA8BA, 2);

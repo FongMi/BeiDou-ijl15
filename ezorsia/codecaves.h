@@ -1,4 +1,5 @@
 #pragma once
+
 DWORD fixMouseWheelAddr = 0x009E8090;
 DWORD fixMouseWheelRetJmpAddr = 0x009E809F;
 DWORD fixMouseWheelCallSetCursorPosAddr = 0x0059A0CB;
@@ -264,16 +265,8 @@ __declspec(naked) void mbpos3()
 	}
 }
 
-#include <chrono>
-using namespace std;
-using chrono::duration_cast;
-using chrono::milliseconds;
-using chrono::system_clock;
-chrono::time_point<chrono::steady_clock> jumptimer;
-bool jumped = false;
-int doActiveJmpBack = 0x0096793B;
 int doBoundJump = 0x0096897A;
-
+int doActiveJmpBack = 0x0096793B;
 void _declspec(naked)doActiveSkills() {
 	_asm {
 		mov eax, 4111006
