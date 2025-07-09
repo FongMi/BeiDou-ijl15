@@ -185,4 +185,22 @@ void Client::MoreHook() {
 	Memory::SetHook(true, reinterpret_cast<void**>(&pDoActiveSkill), CUserLocal__DoActiveSkill_t);
 	Memory::SetHook(true, reinterpret_cast<void**>(&pDoJump), CUserLocal_Jump);
 	Memory::CodeCave((void*)FlashJumpAll, 0x0096BF0B, 0);
+
+	// Enable keyboard for PIC
+	Memory::PatchNop(0x004CA8BA, 2);
+
+	// Remove gender lock
+	Memory::PatchNop(0x00460AED, 2);
+
+	// Move while using skills
+	Memory::WriteByte(0x0095F97A, 0xEB);
+	Memory::WriteByte(0x0095F97A + 1, 0x59);
+	Memory::WriteByte(0x009CBFB0, 0xEB);
+	Memory::PatchNop(0x0094C3BB, 6);
+
+	// Allow chat repeat
+	Memory::WriteByte(0x004905ED + 1, 5);
+
+	// Remove chat alert
+	Memory::WriteInt(0x0049064B + 2, 0);
 }
