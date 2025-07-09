@@ -192,12 +192,6 @@ void Client::MoreHook() {
 	// Remove gender lock
 	Memory::PatchNop(0x00460AED, 2);
 
-	// Move while using skills
-	Memory::WriteByte(0x0095F97A, 0xEB);
-	Memory::WriteByte(0x0095F97A + 1, 0x59);
-	Memory::WriteByte(0x009CBFB0, 0xEB);
-	Memory::PatchNop(0x0094C3BB, 6);
-
 	// Allow chat repeat
 	Memory::WriteByte(0x004905ED + 1, 5);
 
