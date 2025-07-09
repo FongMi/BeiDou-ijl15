@@ -269,7 +269,7 @@ int doBoundJump = 0x0096897A;
 int doActiveJmpBack = 0x0096793B;
 void _declspec(naked)doActiveSkills() {
 	_asm {
-		mov eax, 4111006
+		mov eax, 14101004
 		cmp esi, eax
 		je[jumpmove]
 		mov eax, 2301005 // need this to go back to our original skills from where we codecave
@@ -281,7 +281,7 @@ void _declspec(naked)doActiveSkills() {
 bool isSkillIDMatched(int nSkillID)
 {
 	const int skillIDs[] = {
-		4111006 // put all new skills here
+		14101004
 	};
 	return std::find(std::begin(skillIDs), std::end(skillIDs), nSkillID) != std::end(skillIDs);
 }
@@ -307,7 +307,7 @@ int(__fastcall CUserLocal__DoActiveSkill_t)(int _This, void* edx, int nSkillID, 
 
 auto pDoJump = (int(__thiscall*)(int, int))0x0094C383;
 int(__fastcall CUserLocal_Jump)(int _this, void* edx, int a2) {
-	CUserLocal__DoActiveSkill_t(_this, nullptr, 4111006, 0, 0);
+	CUserLocal__DoActiveSkill_t(_this, nullptr, 14101004, 0, 0);
 	return pDoJump(_this, a2);
 }
 
@@ -317,7 +317,7 @@ void __declspec(naked)FlashJumpAll() {
 	_asm {
 		cmp     eax, 0xD72A0C
 		je[fjvar]
-		cmp     eax, 4111006
+		cmp     eax, 14101004
 		je[fjvar]
 		jmp FlashJumpRet
 		fjvar : jmp[FlashJumpVar]
