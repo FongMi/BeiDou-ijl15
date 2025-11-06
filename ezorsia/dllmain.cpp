@@ -39,7 +39,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		}
 
 		Hook_CreateMutexA(true); //multiclient //ty darter, angel, and alias!
-		HookCreateWindowExA(true); //default ezorsia
 		HookGetModuleFileName(true); //default ezorsia
 		HookPcCreateObject_IWzResMan(true);
 		HookPcCreateObject_IWzNameSpace(true);
@@ -53,7 +52,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		Hook_StringPool__GetString(true); //hook stringpool modification //ty !! popcorn //ty darter
 
 		Client::UpdateGameStartup();
-		Client::UpdateResolution();
 		Client::FixMouseWheel();
 		Client::Chinese();
 		Client::JumpCap();
